@@ -33,6 +33,7 @@ npm run test:e2e
 - O caminho de exemplo funciona em desenvolvimento e é recusado em produção.
 - Caminho curto é recusado. Um caminho longo válido passa.
 - Cookie assinado é aceito; adulteração, outro segredo e expiração são recusados.
+- A página do admin chama `connection()` antes de ler a sessão, para o relógio não cair no prerender.
 - A sexta tentativa de login no mesmo intervalo é bloqueada; limpar a chave libera.
 - Bytes de JPEG, PNG e WEBP são reconhecidos. SVG e arquivo curto não.
 

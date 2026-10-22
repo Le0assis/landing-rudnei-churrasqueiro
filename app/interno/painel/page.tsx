@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { cookies } from "next/headers";
+import { connection } from "next/server";
 import { AdminPanel } from "@/components/admin/admin-panel";
 import { LoginForm } from "@/components/admin/login-form";
 import { readSessionFromCookie, SESSION_COOKIE } from "@/lib/auth";
@@ -24,6 +25,9 @@ export default function AdminRoute() {
 }
 
 async function AdminGate() {
+  // O relógio da sessão (Date.now() em verifySessionToken) não pode rodar no
+  // prerender. connection() segura esta parte até a visita de verdade.
+  await connection();
   const jar = await cookies();
   const authenticated = readSessionFromCookie(jar.get(SESSION_COOKIE)?.value);
   return authenticated ? <AdminPanel /> : <LoginForm />;

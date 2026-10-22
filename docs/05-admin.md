@@ -8,6 +8,8 @@ O endereço é `https://seu-dominio/` + `ADMIN_PATH`. No computador, com `npm ru
 
 Não há link na home, no rodapé, no sitemap nem no `robots.txt`. O caminho interno `/interno/painel` responde 404. O `proxy.ts` só entrega a tela quando o pedido bate com o `ADMIN_PATH`, e manda o cabeçalho `X-Robots-Tag: noindex, nofollow, noarchive`. A página também declara `noindex` nos metadados.
 
+A leitura do cookie fica dentro de `<Suspense>` e chama `connection()` antes de `readSessionFromCookie`. A validade da sessão usa `Date.now()`. Sem essa espera, o prerender do Next 16 para com `blocking-prerender-current-time`.
+
 O caminho precisa combinar com `^[a-z0-9][a-z0-9-]{15,62}[a-z0-9]$`. Menor que isso, o admin fica desligado.
 
 ## Senha e sessão

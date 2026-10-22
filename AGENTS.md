@@ -17,6 +17,7 @@ Leia o bloco do Next acima e os guias em `node_modules/next/dist/docs/` antes de
 - O arquivo de borda é `proxy.ts`, não `middleware.ts`.
 - Dados frescos (fotos, seções visíveis, cookie do admin) ficam dentro de `<Suspense>`. Não use `export const dynamic`. Não chame `new Date()` ou `Math.random()` no miolo estático da página.
 - `GET` de fotos e a leitura das seções chamam `connection()` em `lib/gallery.ts`.
+- O painel admin chama `connection()` antes de `readSessionFromCookie`. O `Date.now()` da sessão não entra no prerender.
 
 ## Onde mexer
 
