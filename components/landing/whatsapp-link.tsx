@@ -19,6 +19,7 @@ export function WhatsAppLink({
       nativeButton={false}
       variant={variant}
       size="touch"
+      role="link"
       render={
         <a href={href ?? generalWhatsAppUrl()} target="_blank" rel="noopener noreferrer" />
       }

@@ -14,7 +14,7 @@ export function PhotoFrame({
   className?: string;
 }) {
   return (
-    <div className={cn("relative overflow-hidden bg-coal", className)}>
+    <div className={cn("relative overflow-hidden bg-coal", className)} style={{ position: "relative" }}>
       <Image
         src={photo.url}
         alt={photo.alt}

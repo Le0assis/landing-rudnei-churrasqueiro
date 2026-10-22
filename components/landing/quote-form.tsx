@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { formatBrl } from "@/lib/format";
 import { LIMITS, SERVICE_OPTIONS, WAITER_PRICE, isServiceOption } from "@/lib/pricing";
-import { calculateLaborTotal, createQuote, type QuoteField } from "@/lib/quote";
+import { calculateLaborTotal, createQuote, saoPauloToday, type QuoteField } from "@/lib/quote";
 
 const fieldClass = "h-12 rounded-xl bg-ink px-3 text-base text-cream";
 
@@ -18,11 +18,12 @@ export function QuoteForm() {
   const [date, setDate] = useState("");
   const [city, setCity] = useState("");
   const [waiters, setWaiters] = useState("0");
+  const [today, setToday] = useState("");
   const [touched, setTouched] = useState<Partial<Record<QuoteField, boolean>>>({});
 
   const result = useMemo(
-    () => createQuote({ option, people, date, city, waiters }),
-    [option, people, date, city, waiters],
+    () => createQuote({ option, people, date, city, waiters, today: today || undefined }),
+    [option, people, date, city, waiters, today],
   );
 
   const preview = useMemo(() => {
@@ -131,7 +132,10 @@ export function QuoteForm() {
                   id="data"
                   type="date"
                   value={date}
-                  onChange={(event) => setDate(event.target.value)}
+                  onChange={(event) => {
+                    setDate(event.target.value);
+                    setToday((current) => current || saoPauloToday(new Date()));
+                  }}
                   onBlur={() => mark("date")}
                   aria-invalid={Boolean(errors.date)}
                   aria-describedby={errors.date ? "data-erro" : undefined}
@@ -223,6 +227,7 @@ export function QuoteForm() {
             <Button
               nativeButton={false}
               size="touch"
+              role="link"
               render={
                 <a
                   href={result.url}

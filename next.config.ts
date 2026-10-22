@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
+  // O dev server escuta em 0.0.0.0, mas o navegador entra por 127.0.0.1.
+  // Sem isso o Next bloqueia o WebSocket de desenvolvimento e a página não hidrata.
+  allowedDevOrigins: ["127.0.0.1", "localhost"],
   turbopack: {
     rules: {
       "*.css": {

@@ -43,7 +43,7 @@ export type QuoteFailure = {
 
 const CITY_PATTERN = /^[\p{L}][\p{L}\s.'-]{1,59}$/u;
 
-export function saoPauloToday(now = new Date()): string {
+export function saoPauloToday(now: Date): string {
   return new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Sao_Paulo",
     year: "numeric",
@@ -152,9 +152,11 @@ function addYears(isoDate: string, years: number): string {
   return `${String(Number(year) + years).padStart(4, "0")}-${month}-${day}`;
 }
 
-export function createQuote(input: QuoteInput): QuoteSuccess | QuoteFailure {
+export function createQuote(input: QuoteInput, now?: Date): QuoteSuccess | QuoteFailure {
   const errors: QuoteFailure["errors"] = {};
-  const today = input.today ?? saoPauloToday();
+  // A data vazia não consulta o relógio. O prerender da página fica estável,
+  // e o "hoje" de São Paulo só entra quando já existe uma data para comparar.
+  const today = input.today ?? (parseDate(input.date) ? saoPauloToday(now ?? new Date()) : "");
 
   if (!isServiceOption(input.option)) {
     errors.option = "Escolha o Churrasco Completo ou o Churrasco Assador.";

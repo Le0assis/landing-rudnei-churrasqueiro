@@ -173,6 +173,8 @@ Abra [http://127.0.0.1:43123](http://127.0.0.1:43123).
 
 O servidor escuta na porta **43123**, não na 3000. Para parar, aperte `Ctrl+C` no terminal.
 
+Use esse endereço (`127.0.0.1`), não outro nome de computador. O `next.config.ts` libera `127.0.0.1` e `localhost` em `allowedDevOrigins`. Sem isso o Next.js bloqueia o canal de desenvolvimento e a página aparece, mas botões e o orçamento não respondem.
+
 Enquanto as fotos reais não forem enviadas, o carrossel mostra ilustrações com a faixa **Imagem ilustrativa**.
 
 ## 6. Entrar na área de fotos

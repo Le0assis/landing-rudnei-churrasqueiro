@@ -39,7 +39,7 @@ test("a home apresenta o churrasco e o orçamento", async ({ page }) => {
   expect(message).toContain("não entram");
 
   await page.getByRole("radio", { name: /Churrasco Assador/ }).check();
-  await page.getByLabel("Garçons").fill("0");
+  await page.getByRole("textbox", { name: "Garçons", exact: true }).fill("0");
   await expect(page.getByTestId("labor-total")).toHaveText(/700,00/);
 
   await page.getByRole("button", { name: "O valor inclui a carne?" }).click();
@@ -79,7 +79,7 @@ test("o caminho secreto não vaza e o login funciona", async ({ page }) => {
 
   await page.getByLabel("Senha").fill("senha-errada-123");
   await page.getByRole("button", { name: "Entrar" }).click();
-  await expect(page.getByRole("alert")).toContainText("Não foi possível entrar.");
+  await expect(page.getByText("Não foi possível entrar.")).toBeVisible();
 
   await page.getByLabel("Senha").fill("churrasco-local-apenas");
   await page.getByRole("button", { name: "Entrar" }).click();

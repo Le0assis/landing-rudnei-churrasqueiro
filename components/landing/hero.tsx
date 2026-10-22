@@ -25,6 +25,7 @@ export function Hero({ photo }: { photo: PublicPhoto }) {
               nativeButton={false}
               variant="outline"
               size="touch"
+              role="link"
               render={<a href="#opcoes" />}
               className="w-full sm:w-auto"
             >

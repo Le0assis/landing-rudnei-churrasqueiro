@@ -32,7 +32,7 @@ Leia o bloco do Next acima e os guias em `node_modules/next/dist/docs/` antes de
 
 ## Comandos
 
-`npm run dev` na porta 43123. `npm run lint`, `npm run typecheck`, `npm test`, `npm run test:e2e` (Playwright; precisa de `.env.local`, criado por `npm run setup`).
+`npm run dev` na porta 43123. O `allowedDevOrigins` do `next.config.ts` precisa incluir `127.0.0.1`: sem isso o dev server bloqueia o WebSocket e a página não hidrata. `npm run lint`, `npm run typecheck`, `npm test`, `npm run test:e2e` (Playwright; precisa de `.env.local`, criado por `npm run setup`).
 
 Documentação para o Gustavo: `README.md` e `docs/`.
 

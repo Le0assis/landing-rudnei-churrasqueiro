@@ -8,6 +8,10 @@ O instalador não entrou no PATH ou o terminal estava aberto antes da instalaç�
 
 O `package.json` pede `node >= 20.9`. Node 18 não roda o Next.js 16. Instale o 22 LTS.
 
+## A página abre, mas clique, menu e orçamento não fazem nada
+
+O Next.js bloqueou o canal de desenvolvimento. O aviso no terminal fala de `allowedDevOrigins` e de `127.0.0.1`. Abra [http://127.0.0.1:43123](http://127.0.0.1:43123) e mantenha `allowedDevOrigins` no `next.config.ts` com `127.0.0.1` e `localhost`. Reinicie o `npm run dev` depois de mexer nisso.
+
 ## A página não abre em `localhost:3000`
 
 Este projeto usa a porta **43123**: [http://127.0.0.1:43123](http://127.0.0.1:43123). O comando é `npm run dev`.
