@@ -27,16 +27,16 @@ O Rudnei Sciole Churrasqueiro é um site de uma página. O Rudnei atende há cin
 
 ## Ordem da página
 
-1. Abertura com o título “Churrasco de pai e filho em Marília, há 5 anos” e o WhatsApp.
+1. Abertura com o título “Churrasco para o seu evento, em Marília e região” e o WhatsApp.
 2. Faixa de confiança: 5 anos, escolhido pelo público em 2023 e em 2024, Marília e região, indicação.
-3. História de pai e filho, em primeira pessoa.
+3. História do Rudnei, em primeira pessoa; o Léo aparece como filho e assistente.
 4. Como funciona: escolha, lista, compra feita por ele, dia do evento.
 5. Tipos de evento.
 6. As duas opções, o que entra nas duas e o garçom.
 7. Orçamento rápido.
-8. Depoimentos ilustrativos, marcados para edição.
+8. Depoimentos, editados na aba Depoimentos do admin (os iniciais são ilustrativos e marcados).
 9. Carrossel.
-10. Galeria, com as abas Festas e Feedbacks.
+10. Galeria, com as abas Festas e Clientes.
 11. Área atendida.
 12. Perguntas frequentes.
 13. Chamada final e rodapé, com a nota de privacidade.

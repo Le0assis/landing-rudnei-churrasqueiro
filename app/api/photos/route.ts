@@ -10,7 +10,8 @@ export async function GET() {
       error: gallery.error,
       photos: gallery.photos,
       festas: gallery.festas,
-      feedbacks: gallery.feedbacks,
+      clientes: gallery.clientes,
+      choripan: gallery.choripan,
     },
     { headers: { "Cache-Control": "no-store" } },
   );

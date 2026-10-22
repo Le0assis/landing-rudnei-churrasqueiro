@@ -7,33 +7,33 @@ import { SectionHeading } from "@/components/landing/section-heading";
 import { Button } from "@/components/ui/button";
 import type { PublicPhoto } from "@/lib/storage/types";
 
-type AlbumId = "festas" | "feedbacks";
+type AlbumId = "festas" | "clientes";
 
 const COPY: Record<AlbumId, { label: string; empty: string }> = {
   festas: {
     label: "Festas",
     empty: "As fotos da equipe e de quem estava na festa entram aqui, uma a uma.",
   },
-  feedbacks: {
-    label: "Feedbacks",
-    empty: "Prints e fotos de recados, do WhatsApp ou do Instagram, entram aqui.",
+  clientes: {
+    label: "Clientes",
+    empty: "As fotos com os clientes, em cada festa, entram aqui.",
   },
 };
 
 export function Album({
   festas,
-  feedbacks,
+  clientes,
   showFestas,
-  showFeedbacks,
+  showClientes,
 }: {
   festas: PublicPhoto[];
-  feedbacks: PublicPhoto[];
+  clientes: PublicPhoto[];
   showFestas: boolean;
-  showFeedbacks: boolean;
+  showClientes: boolean;
 }) {
   const tabs = [
     showFestas ? { id: "festas" as const, photos: festas } : null,
-    showFeedbacks ? { id: "feedbacks" as const, photos: feedbacks } : null,
+    showClientes ? { id: "clientes" as const, photos: clientes } : null,
   ].filter((tab): tab is { id: AlbumId; photos: PublicPhoto[] } => tab !== null);
   const [tab, setTab] = useState<AlbumId>(tabs[0]?.id ?? "festas");
   const [open, setOpen] = useState<number | null>(null);
@@ -53,14 +53,14 @@ export function Album({
     <section id="galeria" className="scroll-mt-24 px-5 py-16 md:py-24">
       <div className="mx-auto w-full max-w-6xl">
         <SectionHeading
-          eyebrow="Galeria"
-          title="Quem estava na festa"
+          eyebrow="Festas e clientes"
+          title="Galeria"
           intro={
-            showFestas && showFeedbacks
-              ? "Festas mostra a equipe e os clientes em cada evento. Feedbacks guarda os recados que chegaram no WhatsApp e no Instagram."
+            showFestas && showClientes
+              ? "Em Festas, a equipe e o ambiente de cada evento. Em Clientes, as fotos com quem recebeu a gente."
               : showFestas
                 ? "Fotos da equipe e de quem estava em cada festa."
-                : "Recados que chegaram no WhatsApp e no Instagram."
+                : "Fotos com os clientes, em cada festa."
           }
         />
 

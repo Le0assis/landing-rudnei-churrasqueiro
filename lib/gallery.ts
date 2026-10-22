@@ -3,6 +3,7 @@ import { cache } from "react";
 import { placeholderPhotos } from "@/content/gallery";
 import { defaultSections, type SectionSettings } from "@/lib/sections";
 import { getPhotoStore, storageKind } from "@/lib/storage";
+import { defaultTestimonials, publicTestimonials, type PublicTestimonial } from "@/lib/testimonials";
 import { photoCategory } from "@/lib/storage/manifest";
 import {
   toPublicPhoto,
@@ -20,9 +21,11 @@ export type GalleryView = {
   story: PublicPhoto;
   photos: PublicPhoto[];
   festas: PublicPhoto[];
-  feedbacks: PublicPhoto[];
+  clientes: PublicPhoto[];
+  choripan: PublicPhoto[];
   shuffle: boolean;
   sections: SectionSettings;
+  testimonials: PublicTestimonial[];
 };
 
 function shufflePhotos(photos: PublicPhoto[]): PublicPhoto[] {
@@ -57,9 +60,11 @@ export const loadGallery = cache(async function loadGallery(): Promise<GalleryVi
       story: fallbackStory,
       photos: shufflePhotos(placeholderPhotos),
       festas: [],
-      feedbacks: [],
+      clientes: [],
+      choripan: [],
       shuffle: true,
       sections: defaultSections(),
+      testimonials: publicTestimonials(defaultTestimonials()),
     };
   }
 
@@ -67,7 +72,8 @@ export const loadGallery = cache(async function loadGallery(): Promise<GalleryVi
     const manifest = await getPhotoStore().list();
     const carousel = ofCategory(manifest.photos, "carrossel");
     const festas = ofCategory(manifest.photos, "festas");
-    const feedbacks = ofCategory(manifest.photos, "feedbacks");
+    const clientes = ofCategory(manifest.photos, "clientes");
+    const choripan = ofCategory(manifest.photos, "choripan");
 
     if (carousel.length === 0) {
       return {
@@ -78,9 +84,11 @@ export const loadGallery = cache(async function loadGallery(): Promise<GalleryVi
         story: fallbackStory,
         photos: manifest.shuffle ? shufflePhotos(placeholderPhotos) : placeholderPhotos,
         festas,
-        feedbacks,
+        clientes,
+        choripan,
         shuffle: manifest.shuffle,
         sections: manifest.sections,
+        testimonials: publicTestimonials(manifest.testimonials),
       };
     }
 
@@ -92,9 +100,11 @@ export const loadGallery = cache(async function loadGallery(): Promise<GalleryVi
       story: carousel[1] ?? carousel[0] ?? fallbackStory,
       photos: manifest.shuffle ? shufflePhotos(carousel) : carousel,
       festas,
-      feedbacks,
+      clientes,
+      choripan,
       shuffle: manifest.shuffle,
       sections: manifest.sections,
+      testimonials: publicTestimonials(manifest.testimonials),
     };
   } catch (error) {
     console.error("Falha ao carregar as fotos do carrossel.", error);
@@ -106,9 +116,11 @@ export const loadGallery = cache(async function loadGallery(): Promise<GalleryVi
       story: fallbackStory,
       photos: [],
       festas: [],
-      feedbacks: [],
+      clientes: [],
+      choripan: [],
       shuffle: true,
       sections: defaultSections(),
+      testimonials: publicTestimonials(defaultTestimonials()),
     };
   }
 });

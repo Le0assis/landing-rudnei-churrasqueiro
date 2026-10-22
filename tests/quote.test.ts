@@ -7,6 +7,7 @@ import {
   calculateLaborTotal,
   createQuote,
   generalWhatsAppUrl,
+  needsExtraPeopleFee,
 } from "@/lib/quote";
 
 const today = "2026-10-22";
@@ -159,5 +160,37 @@ describe("hash da senha", () => {
     } finally {
       process.env.ADMIN_PASSWORD = previous;
     }
+  });
+});
+
+describe("regra das 60 pessoas", () => {
+  it("até 60 pessoas não fala de taxa extra", () => {
+    const result = quote({ people: "60" });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.extraPeopleFee).toBe(false);
+    expect(result.message).not.toContain("a combinar");
+  });
+
+  it("acima de 60 pessoas mostra a taxa extra a combinar e mantém a mão de obra", () => {
+    const result = quote({ people: "61", waiters: "0" });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.extraPeopleFee).toBe(true);
+    expect(result.total).toBe(1500);
+    expect(result.message).toContain("Taxa extra por pessoa (acima de 60 pessoas): a combinar");
+    expect(needsExtraPeopleFee(61)).toBe(true);
+    expect(needsExtraPeopleFee(60)).toBe(false);
+  });
+});
+
+describe("regra das 60 pessoas — casos normais", () => {
+  it("30 pessoas com 2 garçons soma mão de obra sem taxa extra", () => {
+    const result = quote({ people: "30", waiters: "2" });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.extraPeopleFee).toBe(false);
+    expect(result.message).toContain("Total da mão de obra");
+    expect(result.message).not.toContain("Taxa extra");
   });
 });

@@ -2,8 +2,8 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { altFor, cleanCaption } from "@/lib/admin-photos";
-import { hero, privacy, story, testimonials } from "@/content/site";
-import { ASSISTANT_LABEL, OWNER_NAME } from "@/lib/contact";
+import { hero, privacy, story, trustItems } from "@/content/site";
+import { ASSISTANT_LABEL, ASSISTANT_NAME, OWNER_NAME } from "@/lib/contact";
 import { LIMITS } from "@/lib/pricing";
 import {
   defaultSections,
@@ -12,7 +12,7 @@ import {
   toggleSection,
   visibleNav,
 } from "@/lib/sections";
-import { assertCanAdd, parseManifest, reorderPhotos } from "@/lib/storage/manifest";
+import { assertCanAdd, parseManifest, photoCategory, reorderPhotos } from "@/lib/storage/manifest";
 import type { GalleryManifest, PhotoCategory, StoredPhoto } from "@/lib/storage/types";
 
 function photo(category: PhotoCategory, id: string, caption = ""): StoredPhoto {
@@ -32,18 +32,19 @@ function photo(category: PhotoCategory, id: string, caption = ""): StoredPhoto {
 }
 
 function manifest(photos: StoredPhoto[], sections = defaultSections()): GalleryManifest {
-  return { shuffle: true, photos, sections };
+  return { shuffle: true, photos, sections, testimonials: [] };
 }
 
 describe("voz pública", () => {
   it("coloca o Rudnei na frente e o Léo só como filho e assistente", () => {
-    expect(hero.lead.startsWith("Eu sou o Rudnei Sciole")).toBe(true);
-    expect(hero.lead).toContain(`${ASSISTANT_LABEL}, cuidamos`);
-    expect(story.title).toContain(OWNER_NAME);
-    expect(story.paragraphs[0]).toContain(`Quem fala aqui é o ${OWNER_NAME}`);
-    expect(story.paragraphs[0]).toContain(ASSISTANT_LABEL);
+    expect(hero.lead.startsWith("Sou o Rudnei Sciole")).toBe(true);
+    expect(hero.lead).toContain(`meu filho, o ${ASSISTANT_NAME}`);
+    expect(hero.title).toContain("Marília");
+    expect(story.paragraphs.join(" ")).toContain(`meu filho, o ${ASSISTANT_NAME}`);
     expect(story.paragraphs.join(" ")).not.toContain("meu pai");
-    expect(testimonials[1]?.quote).toContain(`${ASSISTANT_LABEL}, troca`);
+    expect(trustItems.map((item) => item.value)).toEqual(["5 anos", "Pai e filho", "2023 e 2024", "Só mão de obra"]);
+    expect(story.paragraphs.join(" ")).toContain("escolhido pelo público");
+    expect(OWNER_NAME).toBe("Rudnei");
     expect(privacy.paragraphs[1]).toContain(ASSISTANT_LABEL);
     expect(privacy.paragraphs[2]).toContain(`Quem responde pelo atendimento é o ${OWNER_NAME}`);
     expect(privacy.paragraphs[2]).toContain("(14) 99627-2725");
@@ -83,9 +84,9 @@ describe("seções", () => {
 
   it("esconde a galeria inteira, uma aba, e o link do menu", () => {
     const sections = defaultSections();
-    sections["galeria-feedbacks"] = false;
+    sections["galeria-clientes"] = false;
     expect(isPublicSectionVisible(sections, "galeria-festas")).toBe(true);
-    expect(isPublicSectionVisible(sections, "galeria-feedbacks")).toBe(false);
+    expect(isPublicSectionVisible(sections, "galeria-clientes")).toBe(false);
     expect(isPublicSectionVisible(sections, "galeria")).toBe(true);
 
     sections.galeria = false;
@@ -94,7 +95,7 @@ describe("seções", () => {
 
     const onlyTabsOff = defaultSections();
     onlyTabsOff["galeria-festas"] = false;
-    onlyTabsOff["galeria-feedbacks"] = false;
+    onlyTabsOff["galeria-clientes"] = false;
     expect(isPublicSectionVisible(onlyTabsOff, "galeria")).toBe(false);
 
     const hiddenStory = defaultSections();
@@ -165,7 +166,7 @@ describe("manifesto de fotos", () => {
       photo("carrossel", "c1"),
       photo("festas", "f1", "Mesa"),
       photo("carrossel", "c2"),
-      photo("feedbacks", "b1", "Recado"),
+      photo("clientes", "b1", "Recado"),
       photo("festas", "f2", "Brasa"),
     ]);
     const next = reorderPhotos(current, ["f2", "f1"], "festas");
@@ -193,7 +194,7 @@ describe("legenda", () => {
     expect(cleanCaption(null)).toBe("");
     expect(altFor("carrossel", "")).toContain("Rudnei Sciole");
     expect(altFor("festas", "")).toContain("festa");
-    expect(altFor("feedbacks", "Recado no WhatsApp")).toBe("Recado no WhatsApp");
+    expect(altFor("clientes", "Com a família")).toBe("Com a família");
   });
 });
 
@@ -208,3 +209,21 @@ function filesUnder(root: string): string[] {
   }
   return found;
 }
+
+describe("clientes e choripán", () => {
+  it("lê a categoria antiga feedbacks como clientes", () => {
+    expect(photoCategory({ category: "feedbacks" })).toBe("clientes");
+    expect(photoCategory({ category: "choripan" })).toBe("choripan");
+    expect(photoCategory({ category: "outra" })).toBe("carrossel");
+  });
+
+  it("lê a chave antiga galeria-feedbacks e liga o choripán por padrão", () => {
+    const parsed = parseSections({ "galeria-feedbacks": false });
+    expect(parsed["galeria-clientes"]).toBe(false);
+    expect(parsed.choripan).toBe(true);
+    const off = defaultSections();
+    off.choripan = false;
+    expect(visibleNav(off).map((link) => link.label)).not.toContain("Choripán");
+    expect(visibleNav(defaultSections()).map((link) => link.label)).toContain("Choripán");
+  });
+});

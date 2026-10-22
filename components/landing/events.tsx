@@ -7,8 +7,8 @@ export function Events() {
       <div className="mx-auto w-full max-w-6xl">
         <SectionHeading
           eyebrow="Tipos de evento"
-          title="Onde a mesa pede brasa"
-          intro="Me conta o motivo. Se couber no fogo e na agenda, eu vou."
+          title="Eventos que eu atendo"
+          intro="Me conte qual é a ocasião e a data, que eu vejo a agenda."
         />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {events.map((event) => (

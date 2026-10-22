@@ -1,6 +1,6 @@
 # Carrossel
 
-A seção “A brasa, de perto” está em `components/landing/gallery.tsx`. A lista chega do servidor por `lib/gallery.ts`, que chama `connection()` para a leitura acontecer na visita, não na hora do build.
+A seção “Fotos dos eventos” está em `components/landing/gallery.tsx`. A lista chega do servidor por `lib/gallery.ts`, que chama `connection()` para a leitura acontecer na visita, não na hora do build.
 
 ## De onde vêm as fotos
 
@@ -28,9 +28,9 @@ Trocar foto não pede um novo deploy: a próxima visita lê o manifesto de novo.
 A seção “Quem estava na festa” está em `components/landing/album.tsx`. São duas abas:
 
 - **Festas**: fotos da equipe e dos clientes em cada evento.
-- **Feedbacks**: prints e fotos de recados vindos do WhatsApp ou do Instagram.
+- **Clientes**: fotos com os clientes nos eventos.
 
-As fotos dessas abas usam as categorias `festas` e `feedbacks` do mesmo manifesto. Não há ilustração de espera aqui: uma aba sem foto mostra só uma frase. Inventar um print de cliente seria um depoimento falso.
+As fotos dessas abas usam as categorias `festas` e `clientes` do mesmo manifesto. Não há ilustração de espera aqui: uma aba sem foto mostra só uma frase. Inventar um print de cliente seria um depoimento falso.
 
 A grade é de duas colunas no celular, três em telas médias e quatro no desktop. O toque abre um lightbox com a foto inteira, a legenda (se houver), Fechar, Anterior e Próxima. Esc fecha. As setas do teclado trocam a foto. Dá para arrastar para o lado. O foco volta para o botão que abriu.
 

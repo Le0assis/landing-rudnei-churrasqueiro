@@ -9,13 +9,16 @@ import type { AdminPhoto } from "@/lib/admin-photos";
 import { compressImage } from "@/lib/compress-image";
 import { SECTION_CATALOG, type SectionId, type SectionSettings } from "@/lib/sections";
 import type { PhotoCategory } from "@/lib/storage/types";
+import type { Testimonial } from "@/lib/testimonials";
+import { TestimonialsPanel } from "@/components/admin/testimonials-panel";
 
-type Panel = PhotoCategory | "secoes";
+type Panel = PhotoCategory | "depoimentos" | "secoes";
 
 type Payload = {
   photos: AdminPhoto[];
   shuffle: boolean;
   sections?: SectionSettings;
+  testimonials?: Testimonial[];
   storage: string;
   storageMessage: string | null;
 };
@@ -29,14 +32,17 @@ const storageLabel: Record<string, string> = {
 const panels: { id: Panel; label: string }[] = [
   { id: "carrossel", label: "Carrossel" },
   { id: "festas", label: "Festas" },
-  { id: "feedbacks", label: "Feedbacks" },
+  { id: "clientes", label: "Clientes" },
+  { id: "choripan", label: "Choripán" },
+  { id: "depoimentos", label: "Depoimentos" },
   { id: "secoes", label: "Seções" },
 ];
 
 const categoryHint: Record<PhotoCategory, string> = {
-  carrossel: "Estas fotos giram na seção “A brasa, de perto” e também abrem a página.",
+  carrossel: "Estas fotos giram na seção “Fotos dos eventos” e também abrem a página.",
   festas: "Fotos da equipe e dos clientes, feitas em cada festa. Aparecem na aba Festas.",
-  feedbacks: "Prints e fotos de recados do WhatsApp ou do Instagram. Aparecem na aba Feedbacks.",
+  clientes: "Fotos com os clientes nos eventos. Aparecem na aba Clientes da galeria.",
+  choripan: "Fotos do choripán. A primeira aparece no bloco de destaque do Choripán.",
 };
 
 export function AdminPanel() {
@@ -73,7 +79,7 @@ export function AdminPanel() {
 
   async function upload(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (panel === "secoes") return;
+    if (panel === "secoes" || panel === "depoimentos") return;
     const form = event.currentTarget;
     const input = form.elements.namedItem("foto");
     const file = input instanceof HTMLInputElement ? input.files?.[0] : undefined;
@@ -141,7 +147,7 @@ export function AdminPanel() {
   }
 
   async function move(index: number, direction: -1 | 1) {
-    if (!data || panel === "secoes") return;
+    if (!data || panel === "secoes" || panel === "depoimentos") return;
     const next = [...photos];
     const target = index + direction;
     const current = next[index];
@@ -176,7 +182,7 @@ export function AdminPanel() {
           <p className="font-condensed text-sm font-semibold tracking-[0.22em] text-ember uppercase">
             Área reservada
           </p>
-          <h1 className="mt-2 font-display text-6xl text-cream">Fotos e seções</h1>
+          <h1 className="mt-2 font-display text-6xl text-cream">Fotos, depoimentos e seções</h1>
         </div>
         <Button
           type="button"
@@ -226,7 +232,13 @@ export function AdminPanel() {
         })}
       </div>
 
-      {panel === "secoes" ? (
+      {panel === "depoimentos" ? (
+        <TestimonialsPanel
+          items={data?.testimonials ?? []}
+          disabled={!data || pending || data.storage === "unconfigured"}
+          mutate={mutate}
+        />
+      ) : panel === "secoes" ? (
         <fieldset className="mt-8 grid gap-3" disabled={!data || pending || data.storage === "unconfigured"}>
           <legend className="font-condensed text-sm font-semibold tracking-[0.16em] text-ember uppercase">
             O que aparece na página

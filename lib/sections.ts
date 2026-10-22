@@ -2,6 +2,7 @@ export const SECTION_IDS = [
   "hero",
   "confianca",
   "sobre",
+  "choripan",
   "como-funciona",
   "eventos",
   "servicos",
@@ -10,7 +11,7 @@ export const SECTION_IDS = [
   "carrossel",
   "galeria",
   "galeria-festas",
-  "galeria-feedbacks",
+  "galeria-clientes",
   "area",
   "faq",
   "contato",
@@ -30,23 +31,28 @@ export const SECTION_CATALOG: readonly {
   {
     id: "confianca",
     label: "Faixa de confiança",
-    hint: "5 anos, escolhido pelo público em 2023 e 2024, e indicação.",
+    hint: "5 anos, pai e filho, escolhido pelo público em 2023 e 2024, só mão de obra.",
   },
   { id: "sobre", label: "Sobre", hint: "A história do Rudnei com o Léo, filho e assistente." },
+  {
+    id: "choripan",
+    label: "Choripán",
+    hint: "O bloco de destaque do carro-chefe, com a foto da categoria Choripán.",
+  },
   { id: "como-funciona", label: "Como funciona", hint: "Os quatro passos, da escolha até o dia do evento." },
   {
     id: "eventos",
     label: "Eventos",
-    hint: "Aniversário, casamento, empresa, família, formatura e buffet.",
+    hint: "Família, amigos, aniversário, casamento, empresa e formatura.",
   },
   { id: "servicos", label: "Serviços e preços", hint: "Completo, Assador e o que entra nas duas opções." },
   { id: "orcamento", label: "Orçamento", hint: "Formulário que abre o WhatsApp com a mensagem pronta." },
-  { id: "depoimentos", label: "Depoimentos", hint: "Cartões ilustrativos, até haver fala autorizada." },
-  { id: "carrossel", label: "Carrossel", hint: "A seção “A brasa, de perto”." },
+  { id: "depoimentos", label: "Depoimentos", hint: "Comentários de clientes, editados na aba Depoimentos." },
+  { id: "carrossel", label: "Carrossel", hint: "A seção “Fotos dos eventos”." },
   {
     id: "galeria",
     label: "Galeria",
-    hint: "A seção com as abas Festas e Feedbacks. Desligada, as duas abas somem juntas.",
+    hint: "A seção com as abas Festas e Clientes. Desligada, as duas abas somem juntas.",
   },
   {
     id: "galeria-festas",
@@ -55,9 +61,9 @@ export const SECTION_CATALOG: readonly {
     nested: true,
   },
   {
-    id: "galeria-feedbacks",
-    label: "Aba Feedbacks",
-    hint: "Prints e fotos de recados do WhatsApp ou do Instagram.",
+    id: "galeria-clientes",
+    label: "Aba Clientes",
+    hint: "Fotos com os clientes nos eventos.",
     nested: true,
   },
   { id: "area", label: "Área atendida", hint: "Marília e região." },
@@ -71,6 +77,7 @@ export const SECTION_CATALOG: readonly {
 
 export const NAV_LINKS = [
   { href: "#historia", label: "História", section: "sobre" },
+  { href: "#choripan", label: "Choripán", section: "choripan" },
   { href: "#como-funciona", label: "Como funciona", section: "como-funciona" },
   { href: "#opcoes", label: "Opções", section: "servicos" },
   { href: "#orcamento", label: "Orçamento", section: "orcamento" },
@@ -92,6 +99,8 @@ export function parseSections(value: unknown): SectionSettings {
   const sections = defaultSections();
   if (!value || typeof value !== "object") return sections;
   const record = value as Record<string, unknown>;
+  // Nome antigo da aba Clientes, gravado antes da troca.
+  if (typeof record["galeria-feedbacks"] === "boolean") sections["galeria-clientes"] = record["galeria-feedbacks"];
   for (const id of SECTION_IDS) {
     if (typeof record[id] === "boolean") sections[id] = record[id];
   }
@@ -106,11 +115,11 @@ export function toggleSection(sections: SectionSettings, id: unknown, enabled: u
 
 export function isPublicSectionVisible(sections: SectionSettings, id: SectionId): boolean {
   if (!sections[id]) return false;
-  if (id === "galeria" || id === "galeria-festas" || id === "galeria-feedbacks") {
+  if (id === "galeria" || id === "galeria-festas" || id === "galeria-clientes") {
     if (!sections.galeria) return false;
   }
   if (id === "galeria") {
-    return sections["galeria-festas"] || sections["galeria-feedbacks"];
+    return sections["galeria-festas"] || sections["galeria-clientes"];
   }
   return true;
 }

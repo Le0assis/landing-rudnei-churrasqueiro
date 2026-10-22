@@ -12,7 +12,7 @@ Quase tudo que o Rudnei diria na página está em `content/site.ts`. O Léo edit
 | `story` | História |
 | `steps` | Os quatro passos |
 | `events` | Tipos de evento |
-| `testimonials` | Cartões ilustrativos. Troque `quote`, `name` e `context`. A faixa “Depoimento ilustrativo” some só se você também tirar esse aviso do componente `components/landing/testimonials.tsx` quando o texto for real |
+| `seedTestimonials` | Só os depoimentos iniciais, usados enquanto o manifesto não tem a lista. Para mudar depoimentos, use a aba Depoimentos do admin |
 | `faqs` | Perguntas e respostas. Entram também no schema.org |
 | `area` | Marília e região |
 | `privacy` | Nota do rodapé |
@@ -21,7 +21,7 @@ Não escreva “prêmio”, “premiado”, “troféu” ou “campeão” para
 
 ## Contato
 
-`lib/contact.ts`: nome, telefone exibido, telefone `5514996272725` (sem pontuação, com 55), Instagram e o nome do Buffet Amigos da Pizza Marília. Se o número mudar, mude os dois formatos juntos.
+`lib/contact.ts`: nome, telefone exibido, telefone `5514996272725` (sem pontuação, com 55), e Instagram. Se o número mudar, mude os dois formatos juntos.
 
 ## Preços
 
@@ -39,7 +39,7 @@ Os testes em `tests/quote.test.ts` esperam 1500, 700 e 150. Se o preço mudar de
 
 Pela área de admin, não por commit. Veja `docs/05-admin.md`.
 
-Carrossel, Festas e Feedbacks são categorias do mesmo manifesto. A aba Seções grava quais blocos a home desenha. Para criar um bloco novo que também possa ser escondido, acrescente o id em `lib/sections.ts` e a condição em `app/page.tsx`. Sem isso, o bloco fica sempre no HTML.
+Carrossel, Choripán, Festas e Clientes são categorias do mesmo manifesto. A aba Seções grava quais blocos a home desenha. Para criar um bloco novo que também possa ser escondido, acrescente o id em `lib/sections.ts` e a condição em `app/page.tsx`. Sem isso, o bloco fica sempre no HTML.
 
 Para trocar só a ilustração de espera, substitua o JPG em `public/placeholders/` mantendo o nome, ou rode `npm run placeholders` e edite `content/gallery.ts` se mudar largura, altura ou texto alternativo.
 

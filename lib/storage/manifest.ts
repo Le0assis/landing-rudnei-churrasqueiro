@@ -1,10 +1,11 @@
 import { cleanCaption } from "@/lib/admin-photos";
 import { LIMITS } from "@/lib/pricing";
 import { parseSections } from "@/lib/sections";
+import { parseTestimonials } from "@/lib/testimonials";
 import {
   emptyManifest,
-  isPhotoCategory,
   isStoredPhoto,
+  toPhotoCategory,
   type GalleryManifest,
   type PhotoCategory,
   type StoredPhoto,
@@ -18,12 +19,13 @@ export function isPhotoId(id: string): boolean {
 }
 
 export function photoCategory(photo: { category?: unknown }): PhotoCategory {
-  return isPhotoCategory(photo.category) ? photo.category : "carrossel";
+  return toPhotoCategory(photo.category) ?? "carrossel";
 }
 
 export function categoryLimitLabel(category: PhotoCategory): string {
   if (category === "festas") return "Festas";
-  if (category === "feedbacks") return "Feedbacks";
+  if (category === "clientes") return "Clientes";
+  if (category === "choripan") return "Choripán";
   return "O carrossel";
 }
 
@@ -46,6 +48,7 @@ export function parseManifest(value: unknown): GalleryManifest {
     shuffle: record.shuffle !== false,
     photos,
     sections: parseSections(record.sections),
+    testimonials: parseTestimonials(record.testimonials),
   };
 }
 

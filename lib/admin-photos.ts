@@ -40,6 +40,7 @@ export function adminPayload(manifest: GalleryManifest) {
     shuffle: manifest.shuffle,
     sections: manifest.sections satisfies SectionSettings,
     photos: manifest.photos.map(toAdminPhoto),
+    testimonials: manifest.testimonials,
   };
 }
 
@@ -51,7 +52,8 @@ export function cleanCaption(value: unknown): string {
 export function altFor(category: PhotoCategory, caption: string): string {
   if (caption) return caption;
   if (category === "festas") return "Foto de festa com a equipe e os clientes do Rudnei Sciole";
-  if (category === "feedbacks") return "Registro de feedback de cliente do Rudnei Sciole";
+  if (category === "clientes") return "Foto do Rudnei Sciole com clientes em um evento";
+  if (category === "choripan") return "Choripán do Rudnei Sciole Churrasqueiro";
   return "Churrasco do Rudnei Sciole Churrasqueiro em Marília";
 }
 

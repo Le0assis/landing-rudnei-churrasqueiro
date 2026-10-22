@@ -3,6 +3,7 @@ import { del, list, put } from "@vercel/blob";
 import { extensionFor } from "@/lib/image-file";
 import { assertCanAdd, isPhotoId, parseManifest, reorderPhotos } from "@/lib/storage/manifest";
 import type { SectionSettings } from "@/lib/sections";
+import type { Testimonial } from "@/lib/testimonials";
 import {
   StorageConfigError,
   emptyManifest,
@@ -130,6 +131,12 @@ export class BlobPhotoStore implements PhotoStore {
 
   async setSections(sections: SectionSettings): Promise<GalleryManifest> {
     const next = { ...(await readManifest()), sections };
+    await writeManifest(next);
+    return next;
+  }
+
+  async setTestimonials(testimonials: Testimonial[]): Promise<GalleryManifest> {
+    const next = { ...(await readManifest()), testimonials };
     await writeManifest(next);
     return next;
   }

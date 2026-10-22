@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { adminPayload, altFor, cleanCaption, cleanDimension } from "@/lib/admin-photos";
 import { defaultSections } from "@/lib/sections";
-import { isPhotoCategory } from "@/lib/storage/types";
+import { toPhotoCategory } from "@/lib/storage/types";
 import { toErrorResponse } from "@/lib/api-error";
 import { assertSameOrigin, getClientIp, jsonError, requireSession } from "@/lib/http";
 import { assertUploadBuffer } from "@/lib/image-file";
@@ -27,6 +27,7 @@ export async function GET(request: NextRequest) {
         shuffle: true,
         sections: defaultSections(),
         photos: [],
+        testimonials: [],
         storage: "unconfigured",
         storageMessage: error.message,
       });
@@ -65,9 +66,7 @@ export async function POST(request: NextRequest) {
   const category =
     rawCategory == null || rawCategory === ""
       ? "carrossel"
-      : isPhotoCategory(rawCategory)
-        ? rawCategory
-        : null;
+      : toPhotoCategory(rawCategory);
   if (!category) return jsonError("Categoria inválida.", 400);
   const caption = cleanCaption(form.get("caption") ?? form.get("alt"));
 

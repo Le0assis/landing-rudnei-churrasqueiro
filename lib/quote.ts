@@ -32,6 +32,7 @@ export type QuoteSuccess = {
   labor: number;
   waiterTotal: number;
   total: number;
+  extraPeopleFee: boolean;
   message: string;
   url: string;
 };
@@ -88,6 +89,7 @@ export function buildWhatsAppMessage(input: {
   labor: number;
   total: number;
 }): string {
+  const extra = needsExtraPeopleFee(input.people);
   const waiterLine =
     input.waiters === 0 ? "Garçons: nenhum" : `Garçons: ${input.waiters}`;
   const breakdown =
@@ -106,9 +108,16 @@ export function buildWhatsAppMessage(input: {
     "",
     `Total da mão de obra: ${formatBrl(input.total)}`,
     breakdown,
+    ...(extra
+      ? [`Taxa extra por pessoa (acima de ${LIMITS.includedPeople} pessoas): a combinar`]
+      : []),
     "",
     "Os alimentos não entram nesse valor. Vocês montam a lista pelo número de pessoas e compram sem custo extra. Eu mando um Pix aproximado das compras, e a diferença a gente acerta na mão de obra.",
   ].join("\n");
+}
+
+export function needsExtraPeopleFee(people: number): boolean {
+  return people > LIMITS.includedPeople;
 }
 
 export function buildWhatsAppUrl(message: string, phone = WHATSAPP_E164): string {
@@ -224,6 +233,7 @@ export function createQuote(input: QuoteInput, now?: Date): QuoteSuccess | Quote
     labor: service.labor,
     waiterTotal: waiters * WAITER_PRICE,
     total,
+    extraPeopleFee: needsExtraPeopleFee(people),
     message,
     url: buildWhatsAppUrl(message),
   };

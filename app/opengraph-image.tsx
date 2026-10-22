@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Rudnei Sciole Churrasqueiro — churrasco de pai e filho em Marília-SP";
+export const alt = "Rudnei Sciole Churrasqueiro — churrasco para eventos em Marília-SP";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -44,7 +44,7 @@ export default function OpenGraphImage() {
         <div style={{ marginTop: 8, fontSize: 48, color: "#ff4d00" }}>Churrasqueiro</div>
       </div>
       <div style={{ display: "flex", fontSize: 32 }}>
-        Churrasco de pai e filho em Marília, há 5 anos
+        Churrasco para o seu evento, em Marília e região
       </div>
     </div>,
     size,

@@ -11,7 +11,7 @@ export function JsonLd() {
         "@type": "FoodEstablishment",
         name: BUSINESS_NAME,
         description:
-          "Churrasco de pai e filho em Marília-SP e região, há 5 anos. Mão de obra para eventos, com lista de compras e atendimento no WhatsApp.",
+          "Churrasco para eventos em Marília-SP e região, há 5 anos. Mão de obra, com lista de compras e atendimento no WhatsApp.",
         url: siteUrl,
         telephone: "+55-14-99627-2725",
         image: `${siteUrl}/opengraph-image`,
@@ -57,4 +57,4 @@ export function JsonLd() {
   );
 }
 
-export const localMetaDescription = `Churrasco de pai e filho em ${CITY_LABEL} e região, há 5 anos. Mão de obra para o seu evento, com sabor, cuidado e atendimento no WhatsApp ${WHATSAPP_DISPLAY}.`;
+export const localMetaDescription = `Churrasco para eventos em ${CITY_LABEL} e região, com o Rudnei e o filho, há 5 anos. Mão de obra; orçamento pelo WhatsApp ${WHATSAPP_DISPLAY}.`;

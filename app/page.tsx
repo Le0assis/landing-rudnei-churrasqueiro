@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { Area } from "@/components/landing/area";
+import { Choripan } from "@/components/landing/choripan";
 import { Album } from "@/components/landing/album";
 import { Events } from "@/components/landing/events";
 import { Faq } from "@/components/landing/faq";
@@ -71,11 +72,12 @@ async function HomeBody() {
         {show("hero") ? <Hero photo={site.hero} showServices={show("servicos")} /> : null}
         {show("confianca") ? <TrustBar /> : null}
         {show("sobre") ? <Story photo={site.story} /> : null}
+        {show("choripan") ? <Choripan photos={site.choripan} /> : null}
         {show("como-funciona") ? <HowItWorks /> : null}
         {show("eventos") ? <Events /> : null}
         {show("servicos") ? <Options /> : null}
         {show("orcamento") ? <QuoteForm /> : null}
-        {show("depoimentos") ? <Testimonials /> : null}
+        {show("depoimentos") ? <Testimonials items={site.testimonials} /> : null}
         {show("carrossel") ? (
           <Gallery
             key={site.photos.map((photo) => photo.id).join("|")}
@@ -87,9 +89,9 @@ async function HomeBody() {
         {show("galeria") ? (
           <Album
             festas={show("galeria-festas") ? site.festas : []}
-            feedbacks={show("galeria-feedbacks") ? site.feedbacks : []}
+            clientes={show("galeria-clientes") ? site.clientes : []}
             showFestas={show("galeria-festas")}
-            showFeedbacks={show("galeria-feedbacks")}
+            showClientes={show("galeria-clientes")}
           />
         ) : null}
         {show("area") ? <Area /> : null}

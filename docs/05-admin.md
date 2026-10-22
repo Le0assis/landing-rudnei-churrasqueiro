@@ -32,7 +32,7 @@ Os valores de exemplo do repositório são recusados quando `NODE_ENV` é `produ
 
 ## O que dá para fazer
 
-Há quatro abas: Carrossel, Festas, Feedbacks e Seções.
+Há seis abas: Carrossel, Festas, Clientes, Choripán, Depoimentos e Seções.
 
 - Publicar foto na aba aberta. O navegador (`lib/compress-image.ts`) aceita JPG, PNG ou WEBP até 10 MB, desenha num canvas de no máximo 1600 px no lado maior e manda JPEG até 2,5 MB. O servidor confere os bytes mágicos de novo e recusa SVG e arquivo grande.
 - Até 30 fotos em cada categoria. Festas cheias não impedem um upload no carrossel.
@@ -40,6 +40,10 @@ Há quatro abas: Carrossel, Festas, Feedbacks e Seções.
 - Subir, descer e apagar dentro da categoria. Apagar pede confirmação na própria lista. A ordem de uma categoria não mexe na outra.
 - Ligar ou desligar o embaralhamento. Isso só existe no carrossel.
 - Na aba Seções, ligar ou desligar cada bloco público: abertura, faixa de confiança, sobre, como funciona, eventos, serviços e preços, orçamento, depoimentos, carrossel, galeria, cada aba da galeria, área, perguntas e contato. Contato inclui a chamada final e o botão fixo de WhatsApp. O botão do topo permanece. A galeria some por inteiro se ela estiver desligada ou se as duas abas estiverem desligadas.
+
+- Na aba Depoimentos, cuidar dos comentários em texto da seção Depoimentos: listar, adicionar, editar, apagar (com confirmação) e ligar/desligar cada um. Campos: nome do cliente (até 80 caracteres), texto (até 600) e evento ou data (opcional, até 120). Até 50 depoimentos. Desligado, o depoimento continua salvo, mas some da página. Se nenhum estiver ligado, a seção inteira some. Os três cartões iniciais são ilustrativos e aparecem com a faixa “Depoimento ilustrativo”; ao editar um deles, a faixa sai. Só publique fala de cliente com autorização.
+
+A API é `/api/admin/testimonials` (mesma origem e sessão obrigatórias): `POST` adiciona `{ name, text, event? }`, `PATCH` edita `{ id, name, text, event? }` ou liga/desliga `{ id, enabled }`, `DELETE` apaga `{ id }`. A regra fica em `lib/testimonials.ts`, testada em `tests/testimonials.test.ts`.
 
 A lista de ids fica em `lib/sections.ts`. O padrão, quando o manifesto ainda não tem o campo, é tudo visível.
 

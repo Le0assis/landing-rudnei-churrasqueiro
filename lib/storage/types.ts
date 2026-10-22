@@ -1,11 +1,22 @@
 import { defaultSections, type SectionSettings } from "@/lib/sections";
+import { defaultTestimonials, type Testimonial } from "@/lib/testimonials";
 
-export const PHOTO_CATEGORIES = ["carrossel", "festas", "feedbacks"] as const;
+export const PHOTO_CATEGORIES = ["carrossel", "festas", "clientes", "choripan"] as const;
 
 export type PhotoCategory = (typeof PHOTO_CATEGORIES)[number];
 
+// Nome antigo da aba Clientes. Manifestos gravados antes da troca ainda trazem
+// "feedbacks"; a leitura converte e a próxima gravação já sai com "clientes".
+export const LEGACY_CATEGORY_ALIASES: Record<string, PhotoCategory> = { feedbacks: "clientes" };
+
 export function isPhotoCategory(value: unknown): value is PhotoCategory {
   return typeof value === "string" && (PHOTO_CATEGORIES as readonly string[]).includes(value);
+}
+
+export function toPhotoCategory(value: unknown): PhotoCategory | null {
+  if (isPhotoCategory(value)) return value;
+  if (typeof value === "string" && value in LEGACY_CATEGORY_ALIASES) return LEGACY_CATEGORY_ALIASES[value] ?? null;
+  return null;
 }
 
 export type ImageContentType = "image/jpeg" | "image/png" | "image/webp";
@@ -28,6 +39,7 @@ export type GalleryManifest = {
   shuffle: boolean;
   photos: StoredPhoto[];
   sections: SectionSettings;
+  testimonials: Testimonial[];
 };
 
 export type NewPhoto = {
@@ -67,6 +79,7 @@ export interface PhotoStore {
   reorder(ids: string[], category: PhotoCategory): Promise<GalleryManifest>;
   setShuffle(shuffle: boolean): Promise<GalleryManifest>;
   setSections(sections: SectionSettings): Promise<GalleryManifest>;
+  setTestimonials(testimonials: Testimonial[]): Promise<GalleryManifest>;
 }
 
 const CONTENT_TYPES = new Set<ImageContentType>(["image/jpeg", "image/png", "image/webp"]);
@@ -89,7 +102,7 @@ export function isStoredPhoto(value: unknown): value is StoredPhoto {
 }
 
 export function emptyManifest(): GalleryManifest {
-  return { shuffle: true, photos: [], sections: defaultSections() };
+  return { shuffle: true, photos: [], sections: defaultSections(), testimonials: defaultTestimonials() };
 }
 
 export function toPublicPhoto(photo: StoredPhoto): PublicPhoto {

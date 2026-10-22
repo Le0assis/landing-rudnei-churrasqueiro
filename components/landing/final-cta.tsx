@@ -13,7 +13,7 @@ export function FinalCta() {
           {slogans.available}
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-cream-dim">
-          Me chama no WhatsApp. Se eu estiver na brasa, respondo assim que o fogo deixar.
+          Me chame no WhatsApp. Se eu estiver num evento, respondo assim que puder.
         </p>
         <div className="mt-8 flex justify-center">
           <WhatsAppLink className="cta-glow">Chamar o {OWNER_NAME} no WhatsApp</WhatsAppLink>

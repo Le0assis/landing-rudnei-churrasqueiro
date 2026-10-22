@@ -57,8 +57,8 @@ export function QuoteForm() {
         <div>
           <SectionHeading
             eyebrow="Orçamento rápido"
-            title="Me conta o básico"
-            intro="Eu calculo a mão de obra na hora e abro o WhatsApp com a mensagem pronta. Nada disso fica salvo no site."
+            title="Peça seu orçamento"
+            intro="Preencha os dados e o site mostra o valor da mão de obra. O botão abre o WhatsApp com a mensagem pronta; nada fica salvo aqui. Os valores são só a mão de obra, para eventos de até 60 pessoas; acima disso, entra uma taxa por pessoa, combinada conforme a quantidade de convidados."
           />
           <form
             className="mt-8 grid gap-5"
@@ -116,7 +116,7 @@ export function QuoteForm() {
                 className={fieldClass}
               />
               <p id="pessoas-ajuda" className="text-sm text-cream-dim">
-                Esse número não muda a mão de obra. Eu uso ele para montar a lista de compras.
+                Até {LIMITS.includedPeople} pessoas, a mão de obra não muda. Acima disso, entra uma taxa por pessoa, a combinar. Eu também uso esse número para montar a lista de compras.
               </p>
               {errors.people ? (
                 <p id="pessoas-erro" role="alert" className="text-sm text-destructive">
@@ -219,8 +219,13 @@ export function QuoteForm() {
           <p data-testid="labor-total" className="mt-3 font-display text-6xl text-flame">
             {preview === null ? "—" : formatBrl(preview)}
           </p>
+          {result.ok && result.extraPeopleFee ? (
+            <p data-testid="extra-fee" className="mt-3 rounded-xl border border-ember/40 bg-ember/10 px-4 py-3 text-sm text-cream">
+              Taxa extra por pessoa (acima de {LIMITS.includedPeople}): <strong>a combinar</strong>
+            </p>
+          ) : null}
           <p className="mt-3 text-sm leading-relaxed text-cream-dim">
-            Os alimentos não entram nesse número. O Pix das compras é aproximado e a diferença é
+            Valor só de mão de obra, para até {LIMITS.includedPeople} pessoas. Os alimentos não entram nesse número. O Pix das compras é aproximado e a diferença é
             acertada no dia.
           </p>
           {result.ok ? (

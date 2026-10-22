@@ -24,13 +24,14 @@ Leia o bloco do Next acima e os guias em `node_modules/next/dist/docs/` antes de
 - Textos: `content/site.ts`. A página fala como o Rudnei. Onde o filho entra, a forma é “Léo, filho e assistente”. Nomes em `lib/contact.ts`. O nome antigo da conta não entra em texto, comentário nem documentação.
 - Preços e cardápio: `lib/pricing.ts`. Telefone e Instagram: `lib/contact.ts`.
 - Cálculo e mensagem do WhatsApp: `lib/quote.ts`. Testes em `tests/quote.test.ts` travam 1500, 700 e 150 de propósito.
-- Fotos: interface `PhotoStore` em `lib/storage/`. Categorias `carrossel`, `festas` e `feedbacks` no mesmo manifesto. Disco local sem token; Vercel Blob com `BLOB_READ_WRITE_TOKEN`. Na Vercel sem token, não grave em disco.
+- Fotos: interface `PhotoStore` em `lib/storage/`. Categorias `carrossel`, `festas`, `clientes` e `choripan` no mesmo manifesto (o nome antigo `feedbacks` é lido como `clientes`; migração com `node scripts/migrate-clientes.mjs [--blob]`). Disco local sem token; Vercel Blob com `BLOB_READ_WRITE_TOKEN`. Na Vercel sem token, não grave em disco.
 - Seções visíveis: campo `sections` do mesmo manifesto (`lib/sections.ts`). Seção desligada não entra no HTML nem no menu. A aba da galeria só aparece se a galeria também estiver ligada.
 - Admin: caminho `ADMIN_PATH` (regex longa), hash scrypt em `ADMIN_PASSWORD`, cookie HMAC `rsc_admin`. Tela em `app/interno/painel`, alcançada só pelo proxy. Não crie link para ela.
 - Não coloque `ADMIN_PATH` no `robots.txt` nem no sitemap. Isso publicaria o segredo. `/interno` e `/api/admin` podem continuar no disallow.
 - Os segredos de `.env.example` são recusados com `NODE_ENV=production` ou `VERCEL=1` (`lib/samples.ts`). Se rotacionar o exemplo, atualize as constantes.
 - 2023 e 2024 são “escolhido pelo público”. Não escreva prêmio, título, troféu ou campeão.
-- Depoimentos em `content/site.ts` são ilustrativos. Não invente avaliação no schema.org (`components/seo/json-ld.tsx`).
+- Depoimentos: campo `testimonials` do mesmo manifesto (`lib/testimonials.ts`, API `app/api/admin/testimonials`, aba em `components/admin/testimonials-panel.tsx`). Manifesto sem o campo usa `seedTestimonials` de `content/site.ts` (ilustrativos). Não invente depoimento nem avaliação no schema.org (`components/seo/json-ld.tsx`).
+- Tom dos textos: natural, simples e caloroso, sem exagero nem frase de efeito. Só fatos combinados (Marília e região, 5 anos, pai e filho, escolhido pelo público em 2023 e 2024, só mão de obra, compra dos insumos com Pix adiantado).
 - Logo em `components/landing/logo.tsx` é um desenho a partir da descrição (círculo preto, chama, chapéu), não o arquivo da gráfica.
 
 ## Comandos

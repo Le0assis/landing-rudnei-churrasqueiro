@@ -5,6 +5,8 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { PhotoFrame } from "@/components/landing/photo-frame";
 import { SectionHeading } from "@/components/landing/section-heading";
 import { Button } from "@/components/ui/button";
+import { InstagramIcon } from "@/components/landing/icons";
+import { instagram } from "@/content/site";
 import { INSTAGRAM_HANDLE, INSTAGRAM_URL } from "@/lib/contact";
 import type { PublicPhoto } from "@/lib/storage/types";
 
@@ -51,11 +53,11 @@ export function Gallery({
       <div className="mx-auto w-full max-w-6xl">
         <SectionHeading
           eyebrow="Fotos"
-          title="A brasa, de perto"
+          title="Fotos dos eventos"
           intro={
             usingPlaceholders
-              ? "Enquanto as fotos reais não chegam, o carrossel gira estas ilustrações. A faixa deixa claro que ainda não são do evento."
-              : "As fotos vêm do arquivo do Rudnei. Elas giram sozinhas e você pode arrastar para o lado."
+              ? "As fotos dos eventos ainda vão entrar aqui. Por enquanto são imagens ilustrativas."
+              : "Algumas fotos dos eventos que eu fiz. Elas passam sozinhas e você pode arrastar para o lado."
           }
         />
 
@@ -141,18 +143,29 @@ export function Gallery({
           </div>
         ) : null}
 
-        <p className="mt-6 text-cream-dim">
-          Mais registros no{" "}
+        <div className="mt-10 flex flex-col items-center gap-5 rounded-[2rem] border border-ember/40 bg-[linear-gradient(135deg,rgba(255,77,0,0.18),rgba(214,41,118,0.14)_55%,rgba(28,21,17,0.9))] p-6 text-center md:flex-row md:p-8 md:text-left">
+          <span className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-[linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7)] text-white shadow-lg">
+            <InstagramIcon className="size-9" />
+          </span>
+          <div className="flex-1">
+            <p className="font-condensed text-sm font-semibold tracking-[0.2em] text-ember uppercase">
+              {instagram.eyebrow}
+            </p>
+            <h3 className="mt-1 font-display text-3xl text-cream md:text-4xl">{instagram.title}</h3>
+            <p className="mt-2 text-cream-dim">
+              {instagram.text} <span className="text-cream">{INSTAGRAM_HANDLE}</span>
+            </p>
+          </div>
           <a
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-ember underline decoration-ember/40 underline-offset-4"
+            className="cta-glow inline-flex h-14 items-center gap-2 rounded-full bg-[linear-gradient(45deg,#f58529,#dd2a7b,#8134af)] px-7 font-semibold text-white transition hover:brightness-110"
           >
-            Instagram {INSTAGRAM_HANDLE}
+            <InstagramIcon className="size-5" />
+            {instagram.button}
           </a>
-          .
-        </p>
+        </div>
       </div>
     </section>
   );

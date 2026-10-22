@@ -4,7 +4,7 @@
 
 `app/layout.tsx` define título e descrição em português, com Marília-SP, mais `metadataBase` para os links absolutos. O Open Graph sai de `app/opengraph-image.tsx` (1200×630). O idioma da página é `pt-BR`. Há `geo.region` `BR-SP` e `geo.placename` Marília.
 
-`components/seo/json-ld.tsx` publica um `FoodEstablishment` (endereço em Marília-SP, telefone, Instagram, faixa de mão de obra) e um `FAQPage` com as perguntas reais. Não há `aggregateRating`: os depoimentos da página são ilustrativos e não entram no schema.
+`components/seo/json-ld.tsx` publica um `FoodEstablishment` (endereço em Marília-SP, telefone, Instagram, faixa de mão de obra) e um `FAQPage` com as perguntas reais. Não há `aggregateRating`: os depoimentos da página são editados no admin e não entram no schema.
 
 `app/sitemap.ts` lista só a home. `app/robots.ts` libera a home e fecha `/interno` e `/api/admin`.
 

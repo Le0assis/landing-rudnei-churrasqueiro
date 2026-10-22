@@ -1,7 +1,7 @@
 import { SectionHeading } from "@/components/landing/section-heading";
-import { slogans } from "@/content/site";
+import { optionsCopy, slogans } from "@/content/site";
 import { formatBrl } from "@/lib/format";
-import { SERVICE_OPTIONS, SHARED_ITEMS, WAITER_PRICE } from "@/lib/pricing";
+import { SERVICE_OPTIONS, SHARED_ITEMS } from "@/lib/pricing";
 
 const options = [SERVICE_OPTIONS.completo, SERVICE_OPTIONS.assador];
 
@@ -9,10 +9,11 @@ export function Options() {
   return (
     <section id="opcoes" className="scroll-mt-24 px-5 py-16 md:py-24">
       <div className="mx-auto w-full max-w-6xl">
-        <SectionHeading eyebrow="As duas opções" title="Escolhe o cuidado" intro={slogans.care} />
-        <p className="mt-4 max-w-2xl text-cream-dim">
-          Os preços abaixo são só a mão de obra. A carne e os outros alimentos não entram nesse valor.
-        </p>
+        <SectionHeading eyebrow="As duas opções" title="Completo ou Assador" intro={slogans.care} />
+        <div className="mt-6 grid max-w-3xl gap-2 rounded-2xl border-l-4 border-flame bg-coal/60 px-5 py-4">
+          <p className="text-cream">{optionsCopy.laborNote}</p>
+          <p data-testid="people-rule" className="text-cream-dim">{optionsCopy.peopleRule}</p>
+        </div>
         <div className="mt-10 grid gap-4 lg:grid-cols-2">
           {options.map((option) => (
             <article key={option.id} className="frame-glow flex flex-col rounded-[1.8rem] border border-flame/35 bg-[radial-gradient(circle_at_top_right,rgba(255,77,0,0.16),transparent_42%),#1c1511] p-6 md:p-8">
@@ -46,9 +47,16 @@ export function Options() {
             ))}
           </ul>
           <p className="mt-6 text-cream-dim">
-            Garçom é opcional: {formatBrl(WAITER_PRICE)} cada. A lista de compras eu faço pelo número de
-            pessoas e compro pessoalmente, sem taxa. Você manda um Pix aproximado e a diferença a gente
+            A lista de compras eu faço pelo número de pessoas e compro pessoalmente, sem taxa. Você manda um Pix aproximado e a diferença a gente
             acerta na mão de obra.
+          </p>
+        </div>
+        <div className="mt-8 flex justify-center">
+          <p
+            data-testid="waiter-strip"
+            className="w-full max-w-3xl rounded-full border border-flame/40 bg-ink-2/80 px-6 py-4 text-center text-cream shadow-[0_0_0_1px_rgba(255,77,0,0.08)] before:mx-auto before:mb-3 before:block before:h-0.5 before:w-12 before:rounded-full before:bg-flame"
+          >
+            {optionsCopy.waiter}
           </p>
         </div>
       </div>

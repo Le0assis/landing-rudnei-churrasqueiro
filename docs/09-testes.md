@@ -39,14 +39,20 @@ npm run test:e2e
 
 `tests/gallery-sections.test.ts`
 
-- A abertura fala “Eu sou o Rudnei Sciole” e cita “Léo, filho e assistente”. O atendimento no rodapé é do Rudnei.
+- A abertura começa com “Sou o Rudnei Sciole” e cita “meu filho, o Léo, filho e assistente”. A faixa de destaques tem 5 anos, Pai e filho, 2023 e 2024 e Só mão de obra. O atendimento no rodapé é do Rudnei.
 - O nome antigo da conta não aparece no site nem na documentação.
 - Seção ausente ou com valor inválido continua visível. Seção desconhecida é recusada.
 - Galeria some se estiver desligada ou se as duas abas estiverem desligadas. O menu perde História e Fotos quando esses blocos estão desligados.
 - Foto antiga, sem categoria, entra no carrossel e sem legenda.
-- Reordenar Festas não troca a ordem do carrossel nem dos feedbacks.
+- Reordenar Festas não troca a ordem do carrossel nem dos clientes.
 - O limite de 30 fotos vale por categoria.
 - Legenda vazia não vira texto. Legenda preenchida vira o texto alternativo.
+
+`tests/testimonials.test.ts`
+
+- Manifesto sem `testimonials` recebe os depoimentos iniciais; lista vazia salva continua vazia; item quebrado é descartado.
+- Adicionar exige nome e texto, evento é opcional, há limite de tamanho e de quantidade (50).
+- Editar tira a marca de ilustrativo; ligar/desligar muda o que vai para a página; apagar remove; id desconhecido é recusado.
 
 ## Navegador (`e2e/smoke.spec.ts`)
 

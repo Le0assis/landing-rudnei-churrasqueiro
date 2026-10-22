@@ -32,7 +32,7 @@ Isso usa a biblioteca `sharp` e o script `scripts/generate-placeholders.mjs`.
 
 - Carregando: blocos escuros no lugar da foto, com um texto só para leitor de tela.
 - Sem fotos reais: ilustrações e a faixa.
-- Falha ao ler o armazenamento: a abertura usa a ilustração e o carrossel mostra um aviso para atualizar a página. O Instagram continua linkado. A galeria de festas e feedbacks fica vazia nesse caso, sem inventar print de cliente.
-- Galeria sem foto ainda: a aba existe, com uma frase dizendo que as fotos entram ali. Não há imagem falsa de feedback.
+- Falha ao ler o armazenamento: a abertura usa a ilustração e o carrossel mostra um aviso para atualizar a página. O Instagram continua linkado. A galeria de festas e clientes fica vazia nesse caso, sem inventar print de cliente.
+- Galeria sem foto ainda: a aba existe, com uma frase dizendo que as fotos entram ali. Não há imagem falsa de cliente.
 - Erro inesperado de uma rota: `app/error.tsx`.
 - Endereço inexistente: `app/not-found.tsx`.
