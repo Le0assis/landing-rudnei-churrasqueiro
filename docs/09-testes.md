@@ -1,0 +1,59 @@
+# Testes
+
+Três checagens estáticas e duas de comportamento.
+
+```bash
+npm run lint
+npm run typecheck
+npm test
+npx playwright install chromium
+npm run test:e2e
+```
+
+`lint` é o ESLint com a configuração do Next.js 16. `typecheck` é `tsc --noEmit`. Os dois precisam passar sem aviso tratado como erro no ESLint (`--max-warnings` não está no script; o padrão do ESLint deste projeto já falha em erro).
+
+## Unidade (`tests/`)
+
+`tests/quote.test.ts`
+
+- Completo sem garçom: R$ 1.500.
+- Cada garçom soma R$ 150. Dois garçons no completo: R$ 1.800.
+- Assador: R$ 700, e a soma com garçons.
+- Mudar a quantidade de pessoas não muda o total, mas muda a mensagem.
+- Garçom negativo, fracionário, acima de 20 ou ausente: erro.
+- Opção desconhecida: erro.
+- Mensagem completa, com data “20 de dezembro de 2026”, Pix, e o link `wa.me/5514996272725` cujo texto decodificado é a própria mensagem.
+- Assador sem garçom explica “nenhum” e “sem garçom”.
+- Formulário vazio ou inválido devolve erros em português e não calcula.
+- Data passada e data a mais de dois anos falham. O dia informado como “hoje” passa.
+- O script `npm run admin:hash` e `verifyAdminPassword` aceitam a mesma senha e recusam outra.
+
+`tests/security.test.ts`
+
+- O caminho de exemplo funciona em desenvolvimento e é recusado em produção.
+- Caminho curto é recusado. Um caminho longo válido passa.
+- Cookie assinado é aceito; adulteração, outro segredo e expiração são recusados.
+- A sexta tentativa de login no mesmo intervalo é bloqueada; limpar a chave libera.
+- Bytes de JPEG, PNG e WEBP são reconhecidos. SVG e arquivo curto não.
+
+## Navegador (`e2e/smoke.spec.ts`)
+
+Sobe `npm run dev` na porta 43123 se ela estiver livre (`reuseExistingServer`). Lê `.env.local`.
+
+- A home tem o título combinado, “escolhido pelo público” e não usa as palavras prêmio, premiado, troféu ou campeão.
+- O orçamento do completo com 40 pessoas e 2 garçons mostra R$ 1.800,00 e o link do WhatsApp contém pessoas, cidade e a frase de que os alimentos não entram.
+- O assador com zero garçons mostra R$ 700,00.
+- Uma pergunta da sanfona abre.
+- O HTML da home não contém o `ADMIN_PATH`.
+- `robots.txt` fecha `/interno` e `/api/admin` e não contém o caminho secreto.
+- O sitemap também não.
+- `/interno/painel` responde 404.
+- `GET /api/admin/photos` sem cookie responde 401.
+- A página secreta tem `noindex`.
+- Senha errada mostra o erro genérico.
+- A senha de exemplo entra, publica a ilustração `brasa.jpg` com uma descrição de teste, a API pública passa a listar essa foto, e apagar volta ao estado vazio.
+- No viewport de celular o WhatsApp fixo aparece e o flutuante não. No desktop, o contrário.
+
+O teste de upload grava em `data/photos` e apaga em seguida. Se ele quebrar no meio, apague `data/photos/manifest.json` e os arquivos em `data/photos/files/` antes de repetir, senão a home deixa de mostrar só as ilustrações.
+
+A senha usada nesse teste é a do exemplo local. Não use essa senha publicada.

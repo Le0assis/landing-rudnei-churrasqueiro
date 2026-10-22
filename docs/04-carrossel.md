@@ -1,0 +1,24 @@
+# Carrossel
+
+A seção “A brasa, de perto” está em `components/landing/gallery.tsx`. A lista chega do servidor por `lib/gallery.ts`, que chama `connection()` para a leitura acontecer na visita, não na hora do build.
+
+## De onde vêm as fotos
+
+1. Se existir `BLOB_READ_WRITE_TOKEN`, a lista é o arquivo `gallery/manifest.json` no Vercel Blob.
+2. Se não existir token e o processo não for a Vercel, a lista é `data/photos/manifest.json`.
+3. Na Vercel sem token, o armazenamento está desconfigurado: o site mostra as ilustrações e o admin explica o que falta.
+4. Lista vazia: ilustrações.
+5. Erro de leitura: aviso no carrossel, ilustração na abertura.
+
+A API pública `GET /api/photos` devolve a mesma lista, com `Cache-Control: no-store`.
+
+## Movimento
+
+- Autoplay a cada 4,5 segundos, se houver mais de uma foto.
+- Pausa ao passar o mouse, ao focar, quando a aba fica escondida, e no botão Pausar / Continuar.
+- Arrastar para o lado, botões Anterior e Próxima, bolinhas e setas do teclado quando a região está focada.
+- Sem autoplay se o sistema pede movimento reduzido.
+
+Se a opção “Embaralhar a ordem a cada visita” estiver ligada (é o padrão), o servidor embaralha a ordem antes de enviar. A foto da abertura continua sendo a primeira da ordem salva, para a imagem principal não pular. Com a opção desligada, o carrossel segue a ordem dos botões subir e descer.
+
+Trocar foto não pede um novo deploy: a próxima visita lê o manifesto de novo.
