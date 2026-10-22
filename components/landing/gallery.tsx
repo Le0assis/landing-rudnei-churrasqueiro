@@ -55,7 +55,7 @@ export function Gallery({
           intro={
             usingPlaceholders
               ? "Enquanto as fotos reais não chegam, o carrossel gira estas ilustrações. A faixa deixa claro que ainda não são do evento."
-              : "As fotos vêm do arquivo do Gustavo. Elas giram sozinhas e você pode arrastar para o lado."
+              : "As fotos vêm do arquivo do Rudnei. Elas giram sozinhas e você pode arrastar para o lado."
           }
         />
 
@@ -82,7 +82,7 @@ export function Gallery({
             onBlur={() => setPaused(false)}
           >
             <motion.div
-              className="relative aspect-[16/10] overflow-hidden rounded-[1.8rem] border border-cream/10"
+              className="frame-glow relative aspect-[16/10] overflow-hidden rounded-[1.8rem] border border-flame/35"
               drag={count > 1 ? "x" : false}
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.12}

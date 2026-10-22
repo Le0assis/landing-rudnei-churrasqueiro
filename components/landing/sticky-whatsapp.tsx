@@ -10,18 +10,18 @@ export function StickyWhatsapp() {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex h-12 items-center justify-center gap-2 rounded-full bg-flame font-semibold text-ink"
+          className="cta-glow flex h-12 items-center justify-center gap-2 rounded-full bg-flame font-semibold text-ink"
           aria-label="WhatsApp fixo no celular"
         >
           <WhatsAppIcon className="size-5" />
-          Chamar no WhatsApp
+          Chamar o Rudnei
         </a>
       </div>
       <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed right-6 bottom-6 z-40 hidden h-14 items-center gap-2 rounded-full bg-flame px-5 font-semibold text-ink shadow-[0_12px_40px_rgba(255,90,31,0.35)] md:inline-flex"
+        className="cta-glow fixed right-6 bottom-6 z-40 hidden h-14 items-center gap-2 rounded-full bg-flame px-5 font-semibold text-ink md:inline-flex"
         aria-label="WhatsApp flutuante"
       >
         <WhatsAppIcon className="size-5" />

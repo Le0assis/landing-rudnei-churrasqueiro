@@ -1,5 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { adminPayload, cleanAlt, cleanDimension } from "@/lib/admin-photos";
+import { adminPayload, altFor, cleanCaption, cleanDimension } from "@/lib/admin-photos";
+import { defaultSections } from "@/lib/sections";
+import { isPhotoCategory } from "@/lib/storage/types";
 import { toErrorResponse } from "@/lib/api-error";
 import { assertSameOrigin, getClientIp, jsonError, requireSession } from "@/lib/http";
 import { assertUploadBuffer } from "@/lib/image-file";
@@ -23,6 +25,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({
         ok: true,
         shuffle: true,
+        sections: defaultSections(),
         photos: [],
         storage: "unconfigured",
         storageMessage: error.message,
@@ -58,13 +61,25 @@ export async function POST(request: NextRequest) {
   const height = cleanDimension(form.get("height"));
   if (!width || !height) return jsonError("Não consegui ler o tamanho da imagem.", 400);
 
+  const rawCategory = form.get("category");
+  const category =
+    rawCategory == null || rawCategory === ""
+      ? "carrossel"
+      : isPhotoCategory(rawCategory)
+        ? rawCategory
+        : null;
+  if (!category) return jsonError("Categoria inválida.", 400);
+  const caption = cleanCaption(form.get("caption") ?? form.get("alt"));
+
   try {
     const buffer = Buffer.from(await file.arrayBuffer());
     const contentType = assertUploadBuffer(buffer);
     const manifest = await getPhotoStore().add({
       data: buffer,
       contentType,
-      alt: cleanAlt(form.get("alt")),
+      alt: altFor(category, caption),
+      caption,
+      category,
       width,
       height,
     });

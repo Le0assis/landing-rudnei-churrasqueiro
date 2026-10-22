@@ -235,7 +235,7 @@ export function QuoteForm() {
                   rel="noopener noreferrer"
                 />
               }
-              className="mt-6 w-full"
+              className="cta-glow mt-6 w-full"
             >
               <WhatsAppIcon className="size-5" />
               Mandar orçamento no WhatsApp
@@ -244,7 +244,7 @@ export function QuoteForm() {
             <Button
               type="button"
               size="touch"
-              className="mt-6 w-full"
+              className="cta-glow mt-6 w-full"
               onClick={() => {
                 setTouched({
                   option: true,

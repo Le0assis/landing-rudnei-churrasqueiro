@@ -9,6 +9,8 @@ export async function GET() {
       usingPlaceholders: gallery.usingPlaceholders,
       error: gallery.error,
       photos: gallery.photos,
+      festas: gallery.festas,
+      feedbacks: gallery.feedbacks,
     },
     { headers: { "Cache-Control": "no-store" } },
   );

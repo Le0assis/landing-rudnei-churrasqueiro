@@ -1,6 +1,6 @@
 # Admin
 
-A área de fotos existe para uma pessoa: o Gustavo. Ela não tem cadastro de clientes.
+A área existe para uma pessoa: o Léo, que mantém o site. Ela não tem cadastro de clientes. Na página pública, quem fala e quem responde no WhatsApp é o Rudnei.
 
 ## Como abrir
 
@@ -30,10 +30,15 @@ Os valores de exemplo do repositório são recusados quando `NODE_ENV` é `produ
 
 ## O que dá para fazer
 
-- Publicar foto. O navegador (`lib/compress-image.ts`) aceita JPG, PNG ou WEBP até 10 MB, desenha num canvas de no máximo 1600 px no lado maior e manda JPEG até 2,5 MB. O servidor confere os bytes mágicos de novo e recusa SVG e arquivo grande.
-- Até 30 fotos.
-- Descrição opcional, até 180 caracteres. Se ficar vazia, o texto padrão é “Churrasco do Rudnei Sciole Churrasqueiro em Marília”.
-- Subir, descer e apagar. Apagar pede confirmação na própria lista.
-- Ligar ou desligar o embaralhamento.
+Há quatro abas: Carrossel, Festas, Feedbacks e Seções.
+
+- Publicar foto na aba aberta. O navegador (`lib/compress-image.ts`) aceita JPG, PNG ou WEBP até 10 MB, desenha num canvas de no máximo 1600 px no lado maior e manda JPEG até 2,5 MB. O servidor confere os bytes mágicos de novo e recusa SVG e arquivo grande.
+- Até 30 fotos em cada categoria. Festas cheias não impedem um upload no carrossel.
+- Descrição opcional, até 180 caracteres. Se ficar vazia, a legenda não aparece e o texto alternativo ganha uma frase genérica daquela categoria. Se for preenchida, a mesma frase vale como legenda e como texto alternativo.
+- Subir, descer e apagar dentro da categoria. Apagar pede confirmação na própria lista. A ordem de uma categoria não mexe na outra.
+- Ligar ou desligar o embaralhamento. Isso só existe no carrossel.
+- Na aba Seções, ligar ou desligar cada bloco público: abertura, faixa de confiança, sobre, como funciona, eventos, serviços e preços, orçamento, depoimentos, carrossel, galeria, cada aba da galeria, área, perguntas e contato. Contato inclui a chamada final e o botão fixo de WhatsApp. O botão do topo permanece. A galeria some por inteiro se ela estiver desligada ou se as duas abas estiverem desligadas.
+
+A lista de ids fica em `lib/sections.ts`. O padrão, quando o manifesto ainda não tem o campo, é tudo visível.
 
 No computador, sem token, aparece “Salvando neste computador, na pasta data/photos.” Na Vercel com Blob, aparece que está salvando no Vercel Blob.

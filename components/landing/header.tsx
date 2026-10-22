@@ -6,15 +6,7 @@ import { Seal, Wordmark } from "@/components/landing/logo";
 import { WhatsAppLink } from "@/components/landing/whatsapp-link";
 import { INSTAGRAM_HANDLE, INSTAGRAM_URL } from "@/lib/contact";
 
-const links = [
-  ["#historia", "História"],
-  ["#como-funciona", "Como funciona"],
-  ["#opcoes", "Opções"],
-  ["#orcamento", "Orçamento"],
-  ["#fotos", "Fotos"],
-] as const;
-
-export function Header() {
+export function Header({ links }: { links: readonly { href: string; label: string }[] }) {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
 
@@ -46,13 +38,13 @@ export function Header() {
           <Wordmark />
         </a>
         <nav className="hidden items-center gap-6 lg:flex" aria-label="Seções">
-          {links.map(([href, label]) => (
+          {links.map((link) => (
             <a
-              key={href}
-              href={href}
-              className="font-condensed text-sm font-semibold tracking-[0.16em] text-cream-dim uppercase hover:text-cream"
+              key={link.href}
+              href={link.href}
+              className="font-condensed text-sm font-semibold tracking-[0.16em] text-cream-dim uppercase hover:text-ember"
             >
-              {label}
+              {link.label}
             </a>
           ))}
         </nav>
@@ -66,29 +58,31 @@ export function Header() {
           >
             <InstagramIcon className="size-5" />
           </a>
-          <WhatsAppLink className="w-auto">WhatsApp</WhatsAppLink>
+          <WhatsAppLink className="cta-glow w-auto">WhatsApp</WhatsAppLink>
         </div>
-        <button
-          type="button"
-          className="inline-flex h-12 items-center rounded-full border border-cream/20 px-4 font-condensed text-sm font-semibold tracking-[0.16em] text-cream uppercase lg:hidden"
-          aria-expanded={open}
-          aria-controls="menu-mobile"
-          onClick={() => setOpen((value) => !value)}
-        >
-          {open ? "Fechar" : "Menu"}
-        </button>
+        {links.length > 0 ? (
+          <button
+            type="button"
+            className="inline-flex h-12 items-center rounded-full border border-ember/40 px-4 font-condensed text-sm font-semibold tracking-[0.16em] text-cream uppercase lg:hidden"
+            aria-expanded={open}
+            aria-controls="menu-mobile"
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? "Fechar" : "Menu"}
+          </button>
+        ) : null}
       </div>
       {open ? (
         <nav id="menu-mobile" className="border-t border-cream/10 px-5 py-4 lg:hidden" aria-label="Seções">
           <ul className="grid gap-1">
-            {links.map(([href, label]) => (
-              <li key={href}>
+            {links.map((link) => (
+              <li key={link.href}>
                 <a
-                  href={href}
+                  href={link.href}
                   className="block rounded-2xl px-3 py-3 font-display text-4xl text-cream"
                   onClick={() => setOpen(false)}
                 >
-                  {label}
+                  {link.label}
                 </a>
               </li>
             ))}

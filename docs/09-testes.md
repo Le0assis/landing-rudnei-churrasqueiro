@@ -36,6 +36,17 @@ npm run test:e2e
 - A sexta tentativa de login no mesmo intervalo é bloqueada; limpar a chave libera.
 - Bytes de JPEG, PNG e WEBP são reconhecidos. SVG e arquivo curto não.
 
+`tests/gallery-sections.test.ts`
+
+- A abertura fala “Eu sou o Rudnei Sciole” e cita “Léo, filho e assistente”. O atendimento no rodapé é do Rudnei.
+- O nome antigo da conta não aparece no site nem na documentação.
+- Seção ausente ou com valor inválido continua visível. Seção desconhecida é recusada.
+- Galeria some se estiver desligada ou se as duas abas estiverem desligadas. O menu perde História e Fotos quando esses blocos estão desligados.
+- Foto antiga, sem categoria, entra no carrossel e sem legenda.
+- Reordenar Festas não troca a ordem do carrossel nem dos feedbacks.
+- O limite de 30 fotos vale por categoria.
+- Legenda vazia não vira texto. Legenda preenchida vira o texto alternativo.
+
 ## Navegador (`e2e/smoke.spec.ts`)
 
 Sobe `npm run dev` na porta 43123 se ela estiver livre (`reuseExistingServer`). Lê `.env.local`.

@@ -19,8 +19,9 @@ As imagens usam `next/image`, com `sizes` e prioridade só na foto da abertura. 
 - Rótulos nos campos, erros com `role="alert"` e `aria-invalid`.
 - Botões de pelo menos 44 px nos controles principais.
 - Carrossel com nome, botão de pausa e teclado.
+- Galeria com abas (`tablist`), grade que abre um diálogo, fechar, setas e arrastar. O foco volta ao que estava aberto antes.
 - Contraste de creme sobre o fundo escuro; o botão laranja usa texto marrom escuro.
-- `prefers-reduced-motion` desliga o autoplay e o brilho animado.
+- `prefers-reduced-motion` desliga o autoplay, o brilho animado e o pulso dos botões.
 - O selo decorativo é `aria-hidden`; o nome do negócio está no texto ao lado.
 
 ## Privacidade (LGPD enxuta)
@@ -31,6 +32,6 @@ O rodapé, âncora `#privacidade`, diz em linguagem direta:
 - o orçamento não é gravado no site: o botão só abre o WhatsApp;
 - o cookie `rsc_admin` existe só para a sessão de quem administra as fotos;
 - a conversa segue no WhatsApp, com a política de lá;
-- quem responde é o Gustavo, no (14) 99627-2725.
+- quem responde é o Rudnei, no (14) 99627-2725. A área de fotos é usada pelo Léo, filho e assistente.
 
 Não há formulário que grave nome, e-mail ou IP em banco. O limite de login guarda o IP na memória da instância por 15 minutos e depois esquece.

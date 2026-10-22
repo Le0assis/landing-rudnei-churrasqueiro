@@ -1,8 +1,20 @@
+import { defaultSections, type SectionSettings } from "@/lib/sections";
+
+export const PHOTO_CATEGORIES = ["carrossel", "festas", "feedbacks"] as const;
+
+export type PhotoCategory = (typeof PHOTO_CATEGORIES)[number];
+
+export function isPhotoCategory(value: unknown): value is PhotoCategory {
+  return typeof value === "string" && (PHOTO_CATEGORIES as readonly string[]).includes(value);
+}
+
 export type ImageContentType = "image/jpeg" | "image/png" | "image/webp";
 
 export type StoredPhoto = {
   id: string;
   alt: string;
+  caption: string;
+  category: PhotoCategory;
   width: number;
   height: number;
   bytes: number;
@@ -15,12 +27,15 @@ export type StoredPhoto = {
 export type GalleryManifest = {
   shuffle: boolean;
   photos: StoredPhoto[];
+  sections: SectionSettings;
 };
 
 export type NewPhoto = {
   data: Buffer;
   contentType: ImageContentType;
   alt: string;
+  caption: string;
+  category: PhotoCategory;
   width: number;
   height: number;
 };
@@ -29,6 +44,7 @@ export type PublicPhoto = {
   id: string;
   url: string;
   alt: string;
+  caption: string;
   width: number;
   height: number;
   placeholder: boolean;
@@ -48,8 +64,9 @@ export interface PhotoStore {
   list(): Promise<GalleryManifest>;
   add(input: NewPhoto): Promise<GalleryManifest>;
   remove(id: string): Promise<GalleryManifest>;
-  reorder(ids: string[]): Promise<GalleryManifest>;
+  reorder(ids: string[], category: PhotoCategory): Promise<GalleryManifest>;
   setShuffle(shuffle: boolean): Promise<GalleryManifest>;
+  setSections(sections: SectionSettings): Promise<GalleryManifest>;
 }
 
 const CONTENT_TYPES = new Set<ImageContentType>(["image/jpeg", "image/png", "image/webp"]);
@@ -72,17 +89,7 @@ export function isStoredPhoto(value: unknown): value is StoredPhoto {
 }
 
 export function emptyManifest(): GalleryManifest {
-  return { shuffle: true, photos: [] };
-}
-
-export function parseManifest(value: unknown): GalleryManifest {
-  if (!value || typeof value !== "object") return emptyManifest();
-  const record = value as Record<string, unknown>;
-  const photos = Array.isArray(record.photos) ? record.photos.filter(isStoredPhoto) : [];
-  return {
-    shuffle: record.shuffle !== false,
-    photos,
-  };
+  return { shuffle: true, photos: [], sections: defaultSections() };
 }
 
 export function toPublicPhoto(photo: StoredPhoto): PublicPhoto {
@@ -90,6 +97,7 @@ export function toPublicPhoto(photo: StoredPhoto): PublicPhoto {
     id: photo.id,
     url: photo.url ?? `/api/media/${photo.id}`,
     alt: photo.alt,
+    caption: photo.caption,
     width: photo.width,
     height: photo.height,
     placeholder: false,

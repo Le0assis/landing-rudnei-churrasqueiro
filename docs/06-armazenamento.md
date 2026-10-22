@@ -5,8 +5,9 @@ Há uma interface só, `PhotoStore`, em `lib/storage/types.ts`:
 - `list`
 - `add`
 - `remove`
-- `reorder`
+- `reorder` (só dentro de uma categoria)
 - `setShuffle`
+- `setSections`
 
 `lib/storage/index.ts` escolhe a implementação:
 
@@ -16,7 +17,9 @@ Há uma interface só, `PhotoStore`, em `lib/storage/types.ts`:
 | Sem token, fora da Vercel | Disco (`lib/storage/local.ts`) |
 | Vercel sem token | Nada. Leitura devolve ilustrações. Gravação explica como configurar |
 
-O manifesto é um JSON `{ shuffle, photos }`. Cada foto tem id, descrição, tamanho, tipo, data, caminho e, no Blob, a URL pública.
+O manifesto é um JSON `{ shuffle, sections, photos }`. Cada foto tem id, descrição, legenda, categoria (`carrossel`, `festas` ou `feedbacks`), tamanho, tipo, data, caminho e, no Blob, a URL pública. Foto antiga, sem categoria, é lida como carrossel e sem legenda. `sections` é um mapa de id para `true` ou `false`. Id ausente fica visível. Os ids estão em `lib/sections.ts`.
+
+O limite é 30 fotos por categoria, não 30 no total.
 
 ## Disco, para desenvolver
 

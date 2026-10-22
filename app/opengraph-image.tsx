@@ -13,8 +13,8 @@ export default function OpenGraphImage() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        background: "#100c0a",
-        color: "#f4ecdf",
+        background: "#0c0908",
+        color: "#fff6ea",
         padding: "72px",
       }}
     >
@@ -24,24 +24,24 @@ export default function OpenGraphImage() {
             width: 88,
             height: 88,
             borderRadius: 999,
-            border: "4px solid #ff5a1f",
+            border: "4px solid #ff4d00",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            color: "#ffb15a",
+            color: "#ffc14a",
             fontSize: 28,
             fontWeight: 700,
           }}
         >
           RS
         </div>
-        <div style={{ display: "flex", fontSize: 28, letterSpacing: 6, color: "#ffb15a" }}>
+        <div style={{ display: "flex", fontSize: 28, letterSpacing: 6, color: "#ffc14a" }}>
           MARÍLIA · SP
         </div>
       </div>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div style={{ fontSize: 92, fontWeight: 700, lineHeight: 0.9 }}>Rudnei Sciole</div>
-        <div style={{ marginTop: 8, fontSize: 48, color: "#ff5a1f" }}>Churrasqueiro</div>
+        <div style={{ marginTop: 8, fontSize: 48, color: "#ff4d00" }}>Churrasqueiro</div>
       </div>
       <div style={{ display: "flex", fontSize: 32 }}>
         Churrasco de pai e filho em Marília, há 5 anos

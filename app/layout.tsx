@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   description: localMetaDescription,
   applicationName: BUSINESS_NAME,
-  authors: [{ name: "Gustavo" }],
+  authors: [{ name: "Rudnei Sciole" }],
   keywords: [
     "churrasco Marília",
     "churrasqueiro Marília",

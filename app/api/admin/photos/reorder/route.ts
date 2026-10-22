@@ -4,6 +4,7 @@ import { toErrorResponse } from "@/lib/api-error";
 import { assertSameOrigin, getClientIp, jsonError, requireSession } from "@/lib/http";
 import { rateLimit } from "@/lib/rate-limit";
 import { getPhotoStore, storageKind, storageSetupMessage } from "@/lib/storage";
+import { isPhotoCategory } from "@/lib/storage/types";
 
 export async function POST(request: NextRequest) {
   if (!assertSameOrigin(request)) return jsonError("Origem recusada.", 403);
@@ -18,9 +19,11 @@ export async function POST(request: NextRequest) {
   }
 
   let ids: unknown;
+  let category: unknown = "carrossel";
   try {
-    const body = (await request.json()) as { ids?: unknown };
+    const body = (await request.json()) as { ids?: unknown; category?: unknown };
     ids = body.ids;
+    if (body.category !== undefined) category = body.category;
   } catch {
     return jsonError("Ordem inválida.", 400);
   }
@@ -28,9 +31,10 @@ export async function POST(request: NextRequest) {
   if (!Array.isArray(ids) || ids.some((id) => typeof id !== "string")) {
     return jsonError("Ordem inválida.", 400);
   }
+  if (!isPhotoCategory(category)) return jsonError("Categoria inválida.", 400);
 
   try {
-    const manifest = await getPhotoStore().reorder(ids);
+    const manifest = await getPhotoStore().reorder(ids, category);
     return NextResponse.json({
       ...adminPayload(manifest),
       storage: storageKind(),

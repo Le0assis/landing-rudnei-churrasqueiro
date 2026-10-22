@@ -7,6 +7,7 @@ export const placeholderPhotos: PublicPhoto[] = [
     alt: "Imagem ilustrativa de brasa e grelha. Ainda não é uma foto do Rudnei Sciole.",
     width: 1600,
     height: 1000,
+    caption: "",
     placeholder: true,
   },
   {
@@ -15,6 +16,7 @@ export const placeholderPhotos: PublicPhoto[] = [
     alt: "Imagem ilustrativa de carne na grelha. Ainda não é uma foto do evento.",
     width: 1600,
     height: 1000,
+    caption: "",
     placeholder: true,
   },
   {
@@ -23,6 +25,7 @@ export const placeholderPhotos: PublicPhoto[] = [
     alt: "Imagem ilustrativa de mesa de churrasco. Substitua pela foto real.",
     width: 1600,
     height: 1000,
+    caption: "",
     placeholder: true,
   },
   {
@@ -31,6 +34,7 @@ export const placeholderPhotos: PublicPhoto[] = [
     alt: "Imagem ilustrativa de pão de alho. Ainda não é uma foto servida por nós.",
     width: 1600,
     height: 1000,
+    caption: "",
     placeholder: true,
   },
   {
@@ -39,6 +43,7 @@ export const placeholderPhotos: PublicPhoto[] = [
     alt: "Imagem ilustrativa de acompanhamentos. Ainda não é uma foto real.",
     width: 1600,
     height: 1000,
+    caption: "",
     placeholder: true,
   },
   {
@@ -47,6 +52,7 @@ export const placeholderPhotos: PublicPhoto[] = [
     alt: "Imagem ilustrativa de um evento à noite. Substitua quando as fotos chegarem.",
     width: 1600,
     height: 1000,
+    caption: "",
     placeholder: true,
   },
 ];

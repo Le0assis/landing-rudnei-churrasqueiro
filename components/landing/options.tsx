@@ -15,12 +15,12 @@ export function Options() {
         </p>
         <div className="mt-10 grid gap-4 lg:grid-cols-2">
           {options.map((option) => (
-            <article key={option.id} className="flex flex-col rounded-[1.8rem] border border-cream/10 bg-ink-2 p-6 md:p-8">
+            <article key={option.id} className="frame-glow flex flex-col rounded-[1.8rem] border border-flame/35 bg-[radial-gradient(circle_at_top_right,rgba(255,77,0,0.16),transparent_42%),#1c1511] p-6 md:p-8">
               <p className="font-condensed text-sm font-semibold tracking-[0.22em] text-ember uppercase">
                 {option.code}
               </p>
               <h3 className="mt-2 font-display text-5xl text-cream md:text-6xl">{option.name}</h3>
-              <p className="mt-4 font-display text-6xl text-flame">{formatBrl(option.labor)}</p>
+              <p className="mt-4 font-display text-6xl text-flame drop-shadow-[0_0_18px_rgba(255,77,0,0.4)]">{formatBrl(option.labor)}</p>
               <p className="font-condensed text-sm tracking-[0.18em] text-cream-dim uppercase">mão de obra</p>
               <p className="mt-4 leading-relaxed text-cream-dim">{option.summary}</p>
               <ul className="mt-6 space-y-2">

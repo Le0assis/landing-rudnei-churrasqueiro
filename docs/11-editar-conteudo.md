@@ -1,6 +1,6 @@
 # Editar conteúdo
 
-Quase tudo que o Gustavo diria na página está em `content/site.ts`. Preços e itens do cardápio estão em `lib/pricing.ts` para o formulário e os testes usarem o mesmo número.
+Quase tudo que o Rudnei diria na página está em `content/site.ts`. O Léo edita esse arquivo. Preços e itens do cardápio estão em `lib/pricing.ts` para o formulário e os testes usarem o mesmo número. Os nomes “Rudnei” e “Léo, filho e assistente” vêm de `lib/contact.ts` (`OWNER_NAME`, `OWNER_FULL_NAME`, `ASSISTANT_LABEL`).
 
 ## Textos
 
@@ -35,9 +35,11 @@ Não escreva “prêmio”, “premiado”, “troféu” ou “campeão” para
 
 Os testes em `tests/quote.test.ts` esperam 1500, 700 e 150. Se o preço mudar de verdade, atualize o teste para o número novo. Isso é intencional: o teste existe para ninguém alterar o valor sem perceber.
 
-## Fotos
+## Fotos e seções
 
 Pela área de admin, não por commit. Veja `docs/05-admin.md`.
+
+Carrossel, Festas e Feedbacks são categorias do mesmo manifesto. A aba Seções grava quais blocos a home desenha. Para criar um bloco novo que também possa ser escondido, acrescente o id em `lib/sections.ts` e a condição em `app/page.tsx`. Sem isso, o bloco fica sempre no HTML.
 
 Para trocar só a ilustração de espera, substitua o JPG em `public/placeholders/` mantendo o nome, ou rode `npm run placeholders` e edite `content/gallery.ts` se mudar largura, altura ou texto alternativo.
 

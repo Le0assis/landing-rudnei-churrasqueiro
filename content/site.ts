@@ -1,4 +1,4 @@
-import { PARTNER_NAME } from "@/lib/contact";
+import { ASSISTANT_LABEL, OWNER_FULL_NAME, OWNER_NAME, PARTNER_NAME, WHATSAPP_DISPLAY } from "@/lib/contact";
 
 export const slogans = {
   union: "Churrasco é mais que comida, é união!",
@@ -9,7 +9,7 @@ export const slogans = {
 
 export const hero = {
   title: "Churrasco de pai e filho em Marília, há 5 anos",
-  lead: "Eu sou o Gustavo. Eu e meu pai cuidamos da brasa, da comida e do seu evento com calma — porque a gente gosta de verdade de receber bem.",
+  lead: `Eu sou o ${OWNER_FULL_NAME}. Eu e o ${ASSISTANT_LABEL}, cuidamos da brasa, da comida e do seu evento com calma — porque a gente gosta de verdade de receber bem.`,
 } as const;
 
 export const trustItems = [
@@ -21,9 +21,9 @@ export const trustItems = [
 
 export const story = {
   eyebrow: "Nossa história",
-  title: "Pai e filho, no mesmo fogo",
+  title: "Rudnei, no mesmo fogo",
   paragraphs: [
-    "Quem fala aqui é o Gustavo. O churrasco eu faço com o meu pai. Há cinco anos a gente chega cedo, acende a brasa e fica até o último prato — em casa, no salão, no aniversário, no casamento.",
+    `Quem fala aqui é o ${OWNER_NAME}. O churrasco eu faço com o ${ASSISTANT_LABEL}. Há cinco anos a gente chega cedo, acende a brasa e fica até o último prato — em casa, no salão, no aniversário, no casamento.`,
     "Não é pressa de quem só quer entregar e ir embora. A gente gosta de comida boa e de ver a mesa cheia. O cuidado vem daí: do tempero, do ponto da carne e do jeito de atender.",
     "Marília foi nos conhecendo de boca em boca. Em 2023, e de novo em 2024, a gente foi escolhido pelo público. Eu guardo isso com carinho. Quando o evento pede salgado, pizza e a estrutura de um buffet, eu chamo o parceiro Buffet Amigos da Pizza Marília.",
   ],
@@ -90,7 +90,7 @@ export const testimonials = [
   {
     id: "ilustrativo-2",
     quote:
-      "Quando alguém autorizar, o Gustavo troca este parágrafo pela frase verdadeira. Até lá, ele fica marcado como ilustrativo.",
+      `Quando alguém autorizar, o ${ASSISTANT_LABEL}, troca este parágrafo pela frase verdadeira. Até lá, ele fica marcado como ilustrativo.`,
     name: "Nome do cliente",
     context: "Tipo de evento · cidade",
   },
@@ -157,7 +157,7 @@ export const privacy = {
   title: "Privacidade, em linguagem clara",
   paragraphs: [
     "Este site não usa anúncio nem cookie de rastreamento. O orçamento não fica guardado aqui: o botão só abre o WhatsApp com a mensagem pronta, no seu celular.",
-    "A área de fotos, usada só pelo Gustavo, guarda um cookie de sessão para manter o login. Esse cookie não identifica você como visitante.",
-    "A conversa segue no WhatsApp, que tem a política da própria plataforma. Quem responde pelo atendimento é o Gustavo, no (14) 99627-2725.",
+    `A área de fotos, usada só pelo ${ASSISTANT_LABEL}, guarda um cookie de sessão para manter o login. Esse cookie não identifica você como visitante.`,
+    `A conversa segue no WhatsApp, que tem a política da própria plataforma. Quem responde pelo atendimento é o ${OWNER_NAME}, no ${WHATSAPP_DISPLAY}.`,
   ],
 } as const;

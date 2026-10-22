@@ -1,10 +1,18 @@
 import { LIMITS } from "@/lib/pricing";
-import { toPublicPhoto, type GalleryManifest, type StoredPhoto } from "@/lib/storage/types";
+import type { SectionSettings } from "@/lib/sections";
+import {
+  toPublicPhoto,
+  type GalleryManifest,
+  type PhotoCategory,
+  type StoredPhoto,
+} from "@/lib/storage/types";
 
 export type AdminPhoto = {
   id: string;
   url: string;
   alt: string;
+  caption: string;
+  category: PhotoCategory;
   width: number;
   height: number;
   bytes: number;
@@ -17,6 +25,8 @@ export function toAdminPhoto(photo: StoredPhoto): AdminPhoto {
     id: photo.id,
     url: publicPhoto.url,
     alt: photo.alt,
+    caption: photo.caption,
+    category: photo.category,
     width: photo.width,
     height: photo.height,
     bytes: photo.bytes,
@@ -28,14 +38,27 @@ export function adminPayload(manifest: GalleryManifest) {
   return {
     ok: true as const,
     shuffle: manifest.shuffle,
+    sections: manifest.sections satisfies SectionSettings,
     photos: manifest.photos.map(toAdminPhoto),
   };
 }
 
-export function cleanAlt(value: unknown): string {
+export function cleanCaption(value: unknown): string {
   const text = typeof value === "string" ? value.trim().replace(/\s+/g, " ") : "";
-  if (!text) return "Churrasco do Rudnei Sciole Churrasqueiro em Marília";
   return text.slice(0, 180);
+}
+
+export function altFor(category: PhotoCategory, caption: string): string {
+  if (caption) return caption;
+  if (category === "festas") return "Foto de festa com a equipe e os clientes do Rudnei Sciole";
+  if (category === "feedbacks") return "Registro de feedback de cliente do Rudnei Sciole";
+  return "Churrasco do Rudnei Sciole Churrasqueiro em Marília";
+}
+
+export function cleanAlt(value: unknown): string {
+  const text = cleanCaption(value);
+  if (!text) return altFor("carrossel", "");
+  return text;
 }
 
 export function cleanDimension(value: unknown): number | null {
@@ -45,5 +68,5 @@ export function cleanDimension(value: unknown): number | null {
 }
 
 export function uploadLimitLabel(): string {
-  return `Até ${LIMITS.maxPhotos} fotos, com no máximo 2,5 MB cada depois da compressão.`;
+  return `Até ${LIMITS.maxPhotos} fotos em cada categoria, com no máximo 2,5 MB cada depois da compressão.`;
 }
