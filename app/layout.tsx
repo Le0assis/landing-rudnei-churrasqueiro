@@ -50,6 +50,14 @@ export const metadata: Metadata = {
     "Rudnei Sciole",
   ],
   alternates: { canonical: "/" },
+  icons: {
+    icon: [
+      { url: "/brand/favicon.ico", sizes: "any" },
+      { url: "/brand/logo-64.png", type: "image/png", sizes: "64x64" },
+      { url: "/brand/logo-192.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: [{ url: "/brand/apple-touch-icon.png", sizes: "180x180" }],
+  },
   openGraph: {
     type: "website",
     locale: "pt_BR",
