@@ -163,28 +163,28 @@ describe("hash da senha", () => {
   });
 });
 
-describe("regra das 60 pessoas", () => {
-  it("até 60 pessoas não fala de taxa extra", () => {
-    const result = quote({ people: "60" });
+describe("regra das 50 pessoas", () => {
+  it("até 50 pessoas não fala de taxa extra", () => {
+    const result = quote({ people: "50" });
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     expect(result.extraPeopleFee).toBe(false);
     expect(result.message).not.toContain("a combinar");
   });
 
-  it("acima de 60 pessoas mostra a taxa extra a combinar e mantém a mão de obra", () => {
-    const result = quote({ people: "61", waiters: "0" });
+  it("acima de 50 pessoas mostra a taxa extra a combinar e mantém a mão de obra", () => {
+    const result = quote({ people: "51", waiters: "0" });
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     expect(result.extraPeopleFee).toBe(true);
     expect(result.total).toBe(1500);
-    expect(result.message).toContain("Taxa extra por pessoa (acima de 60 pessoas): a combinar");
-    expect(needsExtraPeopleFee(61)).toBe(true);
-    expect(needsExtraPeopleFee(60)).toBe(false);
+    expect(result.message).toContain("Taxa extra por pessoa (acima de 50 pessoas): a combinar");
+    expect(needsExtraPeopleFee(51)).toBe(true);
+    expect(needsExtraPeopleFee(50)).toBe(false);
   });
 });
 
-describe("regra das 60 pessoas — casos normais", () => {
+describe("regra das 50 pessoas — casos normais", () => {
   it("30 pessoas com 2 garçons soma mão de obra sem taxa extra", () => {
     const result = quote({ people: "30", waiters: "2" });
     expect(result.ok).toBe(true);

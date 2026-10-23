@@ -12,6 +12,8 @@ O formulário está em `components/landing/quote-form.tsx`. A conta mora em `lib
 
 O número de pessoas **não** entra na conta. Ele vai na mensagem para o Rudnei montar a lista de compras.
 
+A mão de obra vale para até 50 pessoas (`LIMITS.includedPeople` em `lib/pricing.ts`). Acima disso, o total continua o mesmo, mas a mensagem ganha a linha "Taxa extra por pessoa (acima de 50 pessoas): a combinar".
+
 Total = mão de obra da opção + (garçons × 150).
 
 Garçons aceitos: inteiros de 0 a 20. Pessoas: inteiros de 1 a 500. Data: hoje ou futura, no fuso de São Paulo, no máximo dois anos à frente. Cidade: 2 a 60 caracteres, começando com letra.

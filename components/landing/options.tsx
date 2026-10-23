@@ -39,6 +39,11 @@ export function Options() {
           <h3 className="font-condensed text-xl font-semibold tracking-[0.14em] text-ember uppercase">
             Nas duas opções eu levo
           </h3>
+          <p data-testid="shared-labor-note" className="mt-2 text-sm text-cream-dim">
+            <span className="font-semibold text-cream">Incluído na mão de obra.</span> O valor cobre só o preparo desses itens; os
+            ingredientes e insumos são cobrados à parte, fora dos {formatBrl(SERVICE_OPTIONS.completo.labor)} do Completo ou dos{" "}
+            {formatBrl(SERVICE_OPTIONS.assador.labor)} do Assador.
+          </p>
           <ul className="mt-4 grid gap-2 sm:grid-cols-2">
             {SHARED_ITEMS.map((item) => (
               <li key={item} className="text-cream">
