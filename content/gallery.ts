@@ -40,10 +40,9 @@ export const placeholderPhotos: PublicPhoto[] = [
   }),
 ];
 
-export const seedFestas: PublicPhoto[] = [
-  placeholderPhotos[2],
-  placeholderPhotos[3],
-];
+// As fotos de festa do carrossel não se repetem aqui. Até o admin enviar fotos
+// de Festas, a aba mostra o aviso de álbum vazio.
+export const seedFestas: PublicPhoto[] = [];
 
 export const seedClientes: PublicPhoto[] = [
   real({

@@ -18,6 +18,9 @@ const nextConfig: NextConfig = {
     localPatterns: [
       { pathname: "/placeholders/**", search: "" },
       { pathname: "/api/media/**", search: "" },
+      { pathname: "/photos/**", search: "" },
+      { pathname: "/gallery/**", search: "" },
+      { pathname: "/brand/**", search: "" },
     ],
     remotePatterns: [
       {

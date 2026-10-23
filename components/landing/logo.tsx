@@ -9,7 +9,6 @@ export function Seal({ className }: { className?: string }) {
       width={192}
       height={192}
       priority
-      unoptimized
       className={`rounded-full ${className ?? ""}`}
     />
   );
