@@ -124,6 +124,7 @@ export function Album({
                           alt={photo.alt}
                           fill
                           sizes="(min-width: 1024px) 22vw, (min-width: 640px) 30vw, 45vw"
+                          unoptimized={photo.url.startsWith("/gallery/") || photo.url.startsWith("/photos/")}
                           className="album-zoom object-cover transition duration-500 group-hover:scale-[1.04]"
                         />
                       </span>
@@ -255,6 +256,7 @@ function Lightbox({
             alt={photo.alt}
             fill
             sizes="(min-width: 1024px) 960px, 100vw"
+            unoptimized={photo.url.startsWith("/gallery/") || photo.url.startsWith("/photos/")}
             className="object-contain"
           />
         </motion.div>

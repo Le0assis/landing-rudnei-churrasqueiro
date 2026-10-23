@@ -53,8 +53,9 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/brand/favicon.ico", sizes: "any" },
-      { url: "/brand/logo-64.png", type: "image/png", sizes: "64x64" },
-      { url: "/brand/logo-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/brand/simbolo-64.png", type: "image/png", sizes: "64x64" },
+      { url: "/brand/simbolo-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/brand/simbolo-512.png", type: "image/png", sizes: "512x512" },
     ],
     apple: [{ url: "/brand/apple-touch-icon.png", sizes: "180x180" }],
   },

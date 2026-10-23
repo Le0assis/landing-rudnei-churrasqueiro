@@ -4,11 +4,12 @@ import { slogans } from "@/content/site";
 export function Seal({ className }: { className?: string }) {
   return (
     <Image
-      src="/brand/logo-192.png"
+      src="/brand/simbolo-192.png"
       alt="Logo Rudnei Sciole Churrasqueiro"
       width={192}
       height={192}
       priority
+      unoptimized
       className={`rounded-full ${className ?? ""}`}
     />
   );

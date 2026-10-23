@@ -1,6 +1,6 @@
 import { connection } from "next/server";
 import { cache } from "react";
-import { placeholderPhotos } from "@/content/gallery";
+import { placeholderPhotos, seedClientes, seedFestas } from "@/content/gallery";
 import { defaultSections, type SectionSettings } from "@/lib/sections";
 import { getPhotoStore, storageKind } from "@/lib/storage";
 import { defaultTestimonials, publicTestimonials, type PublicTestimonial } from "@/lib/testimonials";
@@ -54,13 +54,13 @@ export const loadGallery = cache(async function loadGallery(): Promise<GalleryVi
   if (storage === "unconfigured") {
     return {
       storage,
-      usingPlaceholders: true,
+      usingPlaceholders: placeholderPhotos.some((photo) => photo.placeholder),
       error: false,
       hero: fallbackHero,
       story: fallbackStory,
       photos: shufflePhotos(placeholderPhotos),
-      festas: [],
-      clientes: [],
+      festas: seedFestas,
+      clientes: seedClientes,
       choripan: [],
       shuffle: true,
       sections: defaultSections(),
@@ -71,14 +71,16 @@ export const loadGallery = cache(async function loadGallery(): Promise<GalleryVi
   try {
     const manifest = await getPhotoStore().list();
     const carousel = ofCategory(manifest.photos, "carrossel");
-    const festas = ofCategory(manifest.photos, "festas");
-    const clientes = ofCategory(manifest.photos, "clientes");
+    const storedFestas = ofCategory(manifest.photos, "festas");
+    const festas = storedFestas.length > 0 ? storedFestas : seedFestas;
+    const storedClientes = ofCategory(manifest.photos, "clientes");
+    const clientes = storedClientes.length > 0 ? storedClientes : seedClientes;
     const choripan = ofCategory(manifest.photos, "choripan");
 
     if (carousel.length === 0) {
       return {
         storage,
-        usingPlaceholders: true,
+        usingPlaceholders: placeholderPhotos.some((photo) => photo.placeholder),
         error: false,
         hero: fallbackHero,
         story: fallbackStory,
