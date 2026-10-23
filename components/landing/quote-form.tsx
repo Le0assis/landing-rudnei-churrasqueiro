@@ -58,7 +58,7 @@ export function QuoteForm() {
           <SectionHeading
             eyebrow="Orçamento rápido"
             title="Peça seu orçamento"
-            intro="Preencha os dados e o site mostra o valor da mão de obra. O botão abre o WhatsApp com a mensagem pronta; nada fica salvo aqui. Os valores são só a mão de obra, para eventos de até 60 pessoas; acima disso, entra uma taxa por pessoa, combinada conforme a quantidade de convidados."
+            intro={`Preencha os dados e o site mostra o valor da mão de obra. O botão abre o WhatsApp com a mensagem pronta; nada fica salvo aqui. Os valores são só a mão de obra, para eventos de até ${LIMITS.includedPeople} pessoas; acima disso, entra uma taxa por pessoa, combinada conforme a quantidade de convidados.`}
           />
           <form
             className="mt-8 grid gap-5"
