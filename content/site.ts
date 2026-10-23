@@ -99,12 +99,13 @@ export const optionsCopy = {
 } as const;
 
 export const hamburguer = {
-  eyebrow: "Opção extra",
-  title: "Hamburgueria",
-  text: "Além do churrasco, também levo uma opção de hamburgueria para o evento. Não tem valor fixo: a gente conversa e combina pelo WhatsApp, conforme a festa.",
+  eyebrow: "Outra opção",
+  title: "Hamburgada",
+  text: "Para quem prefere fugir do churrasco tradicional, também faço hamburgada. É uma alternativa ao churrasco, não um complemento: o evento fica com um ou com outro. Não tem valor fixo; a gente conversa pelo WhatsApp e combina conforme a festa.",
   price: "Valor a combinar",
-  button: "Perguntar sobre a hamburgueria",
-  message: "Olá, Rudnei! Gostaria de saber mais sobre a opção de hamburgueria para o meu evento.",
+  button: "Perguntar sobre a hamburgada",
+  message: "Olá, Rudnei! Gostaria de saber mais sobre a hamburgada para o meu evento.",
+  imageAlt: "Hambúrguer artesanal sendo montado por mãos com luvas pretas, preparado pelo Rudnei Sciole.",
 } as const;
 
 export const instagram = {

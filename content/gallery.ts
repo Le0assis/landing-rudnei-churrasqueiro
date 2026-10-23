@@ -42,13 +42,6 @@ export const placeholderPhotos: PublicPhoto[] = [
 
 export const seedFestas: PublicPhoto[] = [
   placeholderPhotos[2],
-  real({
-    id: "seed-hamburguer",
-    url: "/gallery/hamburguer-artesanal-luvas-pretas.webp",
-    alt: "Hambúrguer artesanal montado por mãos com luvas pretas, em um evento.",
-    width: 640,
-    height: 640,
-  }),
   placeholderPhotos[3],
 ];
 
