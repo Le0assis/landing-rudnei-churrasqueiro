@@ -8,6 +8,7 @@ import { FinalCta } from "@/components/landing/final-cta";
 import { Footer } from "@/components/landing/footer";
 import { Gallery } from "@/components/landing/gallery";
 import { Header } from "@/components/landing/header";
+import { Hamburguer } from "@/components/landing/hamburguer";
 import { Hero } from "@/components/landing/hero";
 import { HowItWorks } from "@/components/landing/how-it-works";
 import { Options } from "@/components/landing/options";
@@ -77,6 +78,7 @@ async function HomeBody() {
         {show("eventos") ? <Events /> : null}
         {show("servicos") ? <Options /> : null}
         {show("orcamento") ? <QuoteForm /> : null}
+        {show("hamburguer") ? <Hamburguer /> : null}
         {show("depoimentos") ? <Testimonials items={site.testimonials} /> : null}
         {show("carrossel") ? (
           <Gallery

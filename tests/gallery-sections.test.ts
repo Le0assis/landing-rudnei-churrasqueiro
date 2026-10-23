@@ -227,3 +227,14 @@ describe("clientes e choripán", () => {
     expect(visibleNav(defaultSections()).map((link) => link.label)).toContain("Choripán");
   });
 });
+
+describe("hamburgueria", () => {
+  it("liga por padrão e some quando desligada", () => {
+    expect(defaultSections().hamburguer).toBe(true);
+    expect(parseSections({}).hamburguer).toBe(true);
+    const off = toggleSection(defaultSections(), "hamburguer", false);
+    expect(isPublicSectionVisible(off, "hamburguer")).toBe(false);
+    expect(isPublicSectionVisible(defaultSections(), "hamburguer")).toBe(true);
+    expect(parseSections({ hamburguer: false }).hamburguer).toBe(false);
+  });
+});

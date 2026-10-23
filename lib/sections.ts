@@ -7,6 +7,7 @@ export const SECTION_IDS = [
   "eventos",
   "servicos",
   "orcamento",
+  "hamburguer",
   "depoimentos",
   "carrossel",
   "galeria",
@@ -47,6 +48,7 @@ export const SECTION_CATALOG: readonly {
   },
   { id: "servicos", label: "Serviços e preços", hint: "Completo, Assador e o que entra nas duas opções." },
   { id: "orcamento", label: "Orçamento", hint: "Formulário que abre o WhatsApp com a mensagem pronta." },
+  { id: "hamburguer", label: "Hamburgueria", hint: "Opção extra, com valor a combinar pelo WhatsApp." },
   { id: "depoimentos", label: "Depoimentos", hint: "Comentários de clientes, editados na aba Depoimentos." },
   { id: "carrossel", label: "Carrossel", hint: "A seção “Fotos dos eventos”." },
   {

@@ -98,6 +98,15 @@ export const optionsCopy = {
   waiter: "Se quiser alguém servindo, cada garçom sai R$ 150,00. Não é obrigatório.",
 } as const;
 
+export const hamburguer = {
+  eyebrow: "Opção extra",
+  title: "Hamburgueria",
+  text: "Além do churrasco, também levo uma opção de hamburgueria para o evento. Não tem valor fixo: a gente conversa e combina pelo WhatsApp, conforme a festa.",
+  price: "Valor a combinar",
+  button: "Perguntar sobre a hamburgueria",
+  message: "Olá, Rudnei! Gostaria de saber mais sobre a opção de hamburgueria para o meu evento.",
+} as const;
+
 export const instagram = {
   eyebrow: "No Instagram",
   title: "Acompanhe as festas por lá",
