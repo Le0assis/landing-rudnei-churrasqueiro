@@ -12,7 +12,7 @@ O formulário está em `components/landing/quote-form.tsx`. A conta mora em `lib
 
 O número de pessoas **não** entra na conta. Ele vai na mensagem para o Rudnei montar a lista de compras.
 
-A mão de obra vale para até 50 pessoas (`LIMITS.includedPeople` em `lib/pricing.ts`). Acima disso, o total continua o mesmo, mas a mensagem ganha a linha "Taxa extra por pessoa (acima de 50 pessoas): a combinar".
+A mão de obra vale para até 50 pessoas (`LIMITS.includedPeople` em `lib/pricing.ts`). Acima disso, o total continua o mesmo, mas a mensagem diz que o valor vale para até 50 pessoas e pergunta "Como fica a taxa por pessoa acima de 50?".
 
 Total = mão de obra da opção + (garçons × 150).
 
@@ -20,7 +20,7 @@ Garçons aceitos: inteiros de 0 a 20. Pessoas: inteiros de 1 a 500. Data: hoje o
 
 ## O que a mensagem deixa claro
 
-O texto é de quem está pedindo o orçamento. Ele cita a opção, as pessoas, a data por extenso, a cidade, os garçons e o total. Diz que os alimentos não entram nesse valor, que a lista sai pelo número de pessoas, que a compra é feita sem custo extra, que o cliente manda um Pix aproximado e que a diferença é acertada na mão de obra.
+O texto é o primeiro contato do cliente, curto e educado: "Olá, Rudnei! Vi seu site e gostaria de um orçamento.", depois a opção, as pessoas, a data por extenso, a cidade e os garçons ("não" quando é 0) em tópicos, o valor da mão de obra com o detalhe (ex.: "Churrasco Assador R$ 700,00 + 1 garçom R$ 150,00") e quatro dúvidas numeradas: valor total com ingredientes, lista de compras e pagamento, horário e duração, e disponibilidade da data. Acima de 50 pessoas entra a dúvida da taxa por pessoa.
 
 O link é `https://wa.me/5514996272725?text=...`. O número também está em `lib/contact.ts`.
 

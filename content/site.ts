@@ -1,4 +1,7 @@
 import { ASSISTANT_LABEL, ASSISTANT_NAME, OWNER_FULL_NAME, OWNER_NAME, WHATSAPP_DISPLAY } from "@/lib/contact";
+import { LIMITS } from "@/lib/pricing";
+
+const INCLUDED_PEOPLE = LIMITS.includedPeople;
 
 export const slogans = {
   union: "Churrasco é mais que comida, é união!",
@@ -94,7 +97,7 @@ export const optionsCopy = {
   laborNote:
     "Os valores abaixo são só a mão de obra. A carne, o carvão e os outros alimentos não entram nesse valor.",
   peopleRule:
-    "Os valores valem para eventos de até 50 pessoas. Acima disso, entra uma taxa por pessoa, que a gente combina conforme a quantidade.",
+    `Os valores valem para eventos de até ${INCLUDED_PEOPLE} pessoas. Acima disso, entra uma taxa por pessoa, que a gente combina conforme a quantidade.`,
   waiter: "Se quiser alguém servindo, cada garçom sai R$ 150,00. Não é obrigatório.",
 } as const;
 
@@ -155,7 +158,7 @@ export const faqs = [
   {
     question: "O número de pessoas muda o preço da mão de obra?",
     answer:
-      "Até 50 pessoas, não: o Completo é R$ 1.500 e o Assador é R$ 700. Acima de 50, entra uma taxa por pessoa, que a gente combina. O número de pessoas também serve para a lista de compras ficar no tamanho certo. Garçom, se você quiser, entra à parte: R$ 150 cada.",
+      `Até ${INCLUDED_PEOPLE} pessoas, não: o Completo é R$ 1.500 e o Assador é R$ 700. Acima de ${INCLUDED_PEOPLE}, entra uma taxa por pessoa, que a gente combina. O número de pessoas também serve para a lista de compras ficar no tamanho certo. Garçom, se você quiser, entra à parte: R$ 150 cada.`,
   },
   {
     question: "Preciso levar garçom?",
@@ -180,7 +183,7 @@ export const faqs = [
   {
     question: "Até quantas pessoas valem os preços?",
     answer:
-      "Os valores de mão de obra valem para até 50 pessoas. Acima disso, entra uma taxa por pessoa, combinada conforme a quantidade de convidados.",
+      `Os valores de mão de obra valem para até ${INCLUDED_PEOPLE} pessoas. Acima disso, entra uma taxa por pessoa, combinada conforme a quantidade de convidados.`,
   },
 ] as const;
 

@@ -68,18 +68,19 @@ describe("mensagem de WhatsApp", () => {
     if (!result.ok) return;
 
     const message = [
-      "Olá! Vim pelo site do Rudnei Sciole Churrasqueiro e quero um orçamento.",
+      "Olá, Rudnei! Vi seu site e gostaria de um orçamento.",
       "",
-      "Opção: Opção 01 — Churrasco Completo",
-      "Pessoas: 40",
-      "Data: 20 de dezembro de 2026",
-      "Cidade: Marília",
-      "Garçons: 2",
+      "• Opção: Churrasco Completo",
+      "• Pessoas: 40",
+      "• Data: 20 de dezembro de 2026",
+      "• Cidade: Marília",
+      "• Garçons: 2",
       "",
-      `Total da mão de obra: ${formatBrl(1800)}`,
-      `(Churrasco Completo ${formatBrl(1500)} + 2 × ${formatBrl(150)} de garçom)`,
-      "",
-      "Os alimentos não entram nesse valor. Vocês montam a lista pelo número de pessoas e compram sem custo extra. Eu mando um Pix aproximado das compras, e a diferença a gente acerta na mão de obra.",
+      `Pelo site, a mão de obra ficaria em ${formatBrl(1800)} (Churrasco Completo ${formatBrl(1500)} + 2 garçons ${formatBrl(300)}). Algumas dúvidas:`,
+      "1. Quanto costuma ficar o valor total, contando os ingredientes?",
+      "2. Como funciona a lista de compras e o pagamento?",
+      "3. Que horas você chega e quanto tempo dura o serviço?",
+      "4. Essa data está disponível?",
     ].join("\n");
 
     expect(result.total).toBe(1800);
@@ -87,8 +88,8 @@ describe("mensagem de WhatsApp", () => {
     expect(result.message).toBe(message);
     expect(result.url).toBe(`https://wa.me/5514996272725?text=${encodeURIComponent(message)}`);
     expect(decodeURIComponent(result.url.split("text=")[1] ?? "")).toBe(message);
-    expect(result.message).toContain("Pix");
-    expect(result.message).toContain("não entram");
+    expect(result.message).not.toContain("Pix");
+    expect(result.message).not.toContain("não entram");
   });
 
   it("explica a ausência de garçom no assador", () => {
@@ -96,9 +97,9 @@ describe("mensagem de WhatsApp", () => {
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     expect(result.total).toBe(700);
-    expect(result.message).toContain("Opção 02 — Churrasco Assador");
-    expect(result.message).toContain("Garçons: nenhum");
-    expect(result.message).toContain("sem garçom");
+    expect(result.message).toContain("• Opção: Churrasco Assador");
+    expect(result.message).toContain("• Garçons: não");
+    expect(result.message).toContain(`(Churrasco Assador ${formatBrl(700)}, sem garçom)`);
     expect(result.message).toContain("Cidade: Garça");
     expect(result.message).toContain("Pessoas: 18");
     expect(result.url.startsWith("https://wa.me/5514996272725?text=")).toBe(true);
@@ -164,21 +165,24 @@ describe("hash da senha", () => {
 });
 
 describe("regra das 50 pessoas", () => {
-  it("até 50 pessoas não fala de taxa extra", () => {
+  it("até 50 pessoas não pergunta a taxa por pessoa", () => {
     const result = quote({ people: "50" });
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     expect(result.extraPeopleFee).toBe(false);
-    expect(result.message).not.toContain("a combinar");
+    expect(result.message).not.toContain("taxa por pessoa");
+    expect(result.message).toContain("4. Essa data está disponível?");
   });
 
-  it("acima de 50 pessoas mostra a taxa extra a combinar e mantém a mão de obra", () => {
+  it("acima de 50 pessoas pergunta a taxa por pessoa e mantém a mão de obra", () => {
     const result = quote({ people: "51", waiters: "0" });
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     expect(result.extraPeopleFee).toBe(true);
     expect(result.total).toBe(1500);
-    expect(result.message).toContain("Taxa extra por pessoa (acima de 50 pessoas): a combinar");
+    expect(result.message).toContain(`a mão de obra para até 50 pessoas ficaria em ${formatBrl(1500)}`);
+    expect(result.message).toContain("2. Como fica a taxa por pessoa acima de 50?");
+    expect(result.message).toContain("5. Essa data está disponível?");
     expect(needsExtraPeopleFee(51)).toBe(true);
     expect(needsExtraPeopleFee(50)).toBe(false);
   });
@@ -190,7 +194,8 @@ describe("regra das 50 pessoas — casos normais", () => {
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     expect(result.extraPeopleFee).toBe(false);
-    expect(result.message).toContain("Total da mão de obra");
-    expect(result.message).not.toContain("Taxa extra");
+    expect(result.message).toContain(`a mão de obra ficaria em ${formatBrl(1800)}`);
+    expect(result.message).toContain("+ 2 garçons");
+    expect(result.message).not.toContain("taxa por pessoa");
   });
 });

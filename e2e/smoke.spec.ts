@@ -36,7 +36,7 @@ test("a home apresenta o churrasco e o orçamento", async ({ page }) => {
   expect(message).toContain("Pessoas: 40");
   expect(message).toContain("Marília");
   expect(message).toContain("1.800,00");
-  expect(message).toContain("não entram");
+  expect(message).toContain("Vi seu site e gostaria de um orçamento");
 
   await page.getByRole("radio", { name: /Churrasco Assador/ }).check();
   await page.getByRole("textbox", { name: "Garçons", exact: true }).fill("0");

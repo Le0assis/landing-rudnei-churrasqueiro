@@ -22,8 +22,8 @@ npm run test:e2e
 - Mudar a quantidade de pessoas não muda o total, mas muda a mensagem.
 - Garçom negativo, fracionário, acima de 20 ou ausente: erro.
 - Opção desconhecida: erro.
-- Mensagem completa, com data “20 de dezembro de 2026”, Pix, e o link `wa.me/5514996272725` cujo texto decodificado é a própria mensagem.
-- Assador sem garçom explica “nenhum” e “sem garçom”.
+- Mensagem completa de primeiro contato, com data “20 de dezembro de 2026”, as dúvidas numeradas e sem o parágrafo do Pix, e o link `wa.me/5514996272725` cujo texto decodificado é a própria mensagem.
+- Assador sem garçom mostra “Garçons: não” e “sem garçom”.
 - Formulário vazio ou inválido devolve erros em português e não calcula.
 - Data passada e data a mais de dois anos falham. O dia informado como “hoje” passa.
 - O script `npm run admin:hash` e `verifyAdminPassword` aceitam a mesma senha e recusam outra.
@@ -59,7 +59,7 @@ npm run test:e2e
 Sobe `npm run dev` na porta 43123 se ela estiver livre (`reuseExistingServer`). Lê `.env.local`.
 
 - A home tem o título combinado, “escolhido pelo público” e não usa as palavras prêmio, premiado, troféu ou campeão.
-- O orçamento do completo com 40 pessoas e 2 garçons mostra R$ 1.800,00 e o link do WhatsApp contém pessoas, cidade e a frase de que os alimentos não entram.
+- O orçamento do completo com 40 pessoas e 2 garçons mostra R$ 1.800,00 e o link do WhatsApp contém pessoas, cidade e a abertura “Vi seu site e gostaria de um orçamento”.
 - O assador com zero garçons mostra R$ 700,00.
 - Uma pergunta da sanfona abre.
 - O HTML da home não contém o `ADMIN_PATH`.

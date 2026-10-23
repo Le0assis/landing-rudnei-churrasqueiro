@@ -90,29 +90,35 @@ export function buildWhatsAppMessage(input: {
   total: number;
 }): string {
   const extra = needsExtraPeopleFee(input.people);
-  const waiterLine =
-    input.waiters === 0 ? "Garçons: nenhum" : `Garçons: ${input.waiters}`;
-  const breakdown =
-    input.waiters === 0
-      ? `(${input.optionName} ${formatBrl(input.labor)}, sem garçom)`
-      : `(${input.optionName} ${formatBrl(input.labor)} + ${input.waiters} × ${formatBrl(WAITER_PRICE)} de garçom)`;
+  const included = LIMITS.includedPeople;
+  const waiterLabel = input.waiters === 1 ? "1 garçom" : `${input.waiters} garçons`;
+  const detail =
+    input.waiters > 0
+      ? `${input.optionName} ${formatBrl(input.labor)} + ${waiterLabel} ${formatBrl(input.waiters * WAITER_PRICE)}`
+      : `${input.optionName} ${formatBrl(input.labor)}, sem garçom`;
+  const bullet = (label: string, value: string | number | undefined) =>
+    value === undefined || String(value).trim() === "" ? [] : [`• ${label}: ${value}`];
+  const questions = [
+    "Quanto costuma ficar o valor total, contando os ingredientes?",
+    ...(extra ? [`Como fica a taxa por pessoa acima de ${included}?`] : []),
+    "Como funciona a lista de compras e o pagamento?",
+    "Que horas você chega e quanto tempo dura o serviço?",
+    "Essa data está disponível?",
+  ];
 
   return [
-    "Olá! Vim pelo site do Rudnei Sciole Churrasqueiro e quero um orçamento.",
+    "Olá, Rudnei! Vi seu site e gostaria de um orçamento.",
     "",
-    `Opção: ${input.optionCode} — ${input.optionName}`,
-    `Pessoas: ${input.people}`,
-    `Data: ${input.dateLabel}`,
-    `Cidade: ${input.city}`,
-    waiterLine,
+    ...bullet("Opção", input.optionName),
+    ...bullet("Pessoas", input.people),
+    ...bullet("Data", input.dateLabel),
+    ...bullet("Cidade", input.city),
+    ...bullet("Garçons", input.waiters > 0 ? input.waiters : "não"),
     "",
-    `Total da mão de obra: ${formatBrl(input.total)}`,
-    breakdown,
-    ...(extra
-      ? [`Taxa extra por pessoa (acima de ${LIMITS.includedPeople} pessoas): a combinar`]
-      : []),
-    "",
-    "Os alimentos não entram nesse valor. Vocês montam a lista pelo número de pessoas e compram sem custo extra. Eu mando um Pix aproximado das compras, e a diferença a gente acerta na mão de obra.",
+    extra
+      ? `Pelo site, a mão de obra para até ${included} pessoas ficaria em ${formatBrl(input.total)} (${detail}). Algumas dúvidas:`
+      : `Pelo site, a mão de obra ficaria em ${formatBrl(input.total)} (${detail}). Algumas dúvidas:`,
+    ...questions.map((question, index) => `${index + 1}. ${question}`),
   ].join("\n");
 }
 
