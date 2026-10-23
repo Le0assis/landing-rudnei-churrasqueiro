@@ -2,7 +2,7 @@ import { SectionHeading } from "@/components/landing/section-heading";
 import { area } from "@/content/site";
 
 const MAPS_EMBED = "https://www.google.com/maps?q=Mar%C3%ADlia,SP&z=11&hl=pt-BR&output=embed";
-const MAPS_LINK = "https://www.google.com/maps?q=Mar%C3%ADlia,SP";
+const MAPS_LINK = "https://www.google.com/maps?q=Mar%C3%ADlia,SP&hl=pt-BR";
 
 export function Area() {
   return (
