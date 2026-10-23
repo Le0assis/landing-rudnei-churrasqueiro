@@ -2,12 +2,14 @@ import { randomUUID } from "node:crypto";
 import { mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { extensionFor } from "@/lib/image-file";
-import { assertCanAdd, isPhotoId, reorderPhotos } from "@/lib/storage/manifest";
+import { assertCanAdd, isPhotoId, parseManifest, reorderPhotos } from "@/lib/storage/manifest";
+import type { SectionSettings } from "@/lib/sections";
+import type { Testimonial } from "@/lib/testimonials";
 import {
   emptyManifest,
-  parseManifest,
   type GalleryManifest,
   type NewPhoto,
+  type PhotoCategory,
   type PhotoStore,
 } from "@/lib/storage/types";
 
@@ -49,7 +51,7 @@ export class LocalPhotoStore implements PhotoStore {
 
   async add(input: NewPhoto): Promise<GalleryManifest> {
     const manifest = await readManifest();
-    assertCanAdd(manifest);
+    assertCanAdd(manifest, input.category);
     await mkdir(FILES, { recursive: true });
 
     const id = randomUUID();
@@ -63,6 +65,8 @@ export class LocalPhotoStore implements PhotoStore {
         {
           id,
           alt: input.alt,
+          caption: input.caption,
+          category: input.category,
           width: input.width,
           height: input.height,
           bytes: input.data.length,
@@ -92,14 +96,26 @@ export class LocalPhotoStore implements PhotoStore {
     return next;
   }
 
-  async reorder(ids: string[]): Promise<GalleryManifest> {
-    const next = reorderPhotos(await readManifest(), ids);
+  async reorder(ids: string[], category: PhotoCategory): Promise<GalleryManifest> {
+    const next = reorderPhotos(await readManifest(), ids, category);
     await writeManifest(next);
     return next;
   }
 
   async setShuffle(shuffle: boolean): Promise<GalleryManifest> {
     const next = { ...(await readManifest()), shuffle };
+    await writeManifest(next);
+    return next;
+  }
+
+  async setSections(sections: SectionSettings): Promise<GalleryManifest> {
+    const next = { ...(await readManifest()), sections };
+    await writeManifest(next);
+    return next;
+  }
+
+  async setTestimonials(testimonials: Testimonial[]): Promise<GalleryManifest> {
+    const next = { ...(await readManifest()), testimonials };
     await writeManifest(next);
     return next;
   }

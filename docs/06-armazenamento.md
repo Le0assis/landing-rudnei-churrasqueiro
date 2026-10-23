@@ -5,8 +5,9 @@ Há uma interface só, `PhotoStore`, em `lib/storage/types.ts`:
 - `list`
 - `add`
 - `remove`
-- `reorder`
+- `reorder` (só dentro de uma categoria)
 - `setShuffle`
+- `setSections`
 
 `lib/storage/index.ts` escolhe a implementação:
 
@@ -16,7 +17,9 @@ Há uma interface só, `PhotoStore`, em `lib/storage/types.ts`:
 | Sem token, fora da Vercel | Disco (`lib/storage/local.ts`) |
 | Vercel sem token | Nada. Leitura devolve ilustrações. Gravação explica como configurar |
 
-O manifesto é um JSON `{ shuffle, photos }`. Cada foto tem id, descrição, tamanho, tipo, data, caminho e, no Blob, a URL pública.
+O manifesto é um JSON `{ shuffle, sections, photos, testimonials }`. Cada foto tem id, descrição, legenda, categoria (`carrossel`, `festas`, `clientes` ou `choripan`; o antigo `feedbacks` é lido como `clientes` e migrado por `node scripts/migrate-clientes.mjs`, com `--blob` para o Vercel Blob), tamanho, tipo, data, caminho e, no Blob, a URL pública. Foto antiga, sem categoria, é lida como carrossel e sem legenda. `sections` é um mapa de id para `true` ou `false`. Id ausente fica visível. Os ids estão em `lib/sections.ts`. `testimonials` é a lista de depoimentos (`id`, `name`, `text`, `event`, `enabled`, `illustrative`, `createdAt`). Se o campo não existe (manifesto antigo), o site usa os depoimentos iniciais de `seedTestimonials` em `content/site.ts`; a primeira mudança no admin grava a lista no manifesto. Uma lista vazia gravada continua vazia.
+
+O limite é 30 fotos por categoria, não 30 no total.
 
 ## Disco, para desenvolver
 

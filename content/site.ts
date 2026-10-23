@@ -1,4 +1,4 @@
-import { PARTNER_NAME } from "@/lib/contact";
+import { ASSISTANT_LABEL, ASSISTANT_NAME, OWNER_FULL_NAME, OWNER_NAME, WHATSAPP_DISPLAY } from "@/lib/contact";
 
 export const slogans = {
   union: "Churrasco é mais que comida, é união!",
@@ -8,24 +8,24 @@ export const slogans = {
 } as const;
 
 export const hero = {
-  title: "Churrasco de pai e filho em Marília, há 5 anos",
-  lead: "Eu sou o Gustavo. Eu e meu pai cuidamos da brasa, da comida e do seu evento com calma — porque a gente gosta de verdade de receber bem.",
+  title: "Churrasco para festas de família e amigos, em Marília e região",
+  lead: `Sou o ${OWNER_FULL_NAME}. Faço churrasco em festas há 5 anos, com a ajuda do meu filho, o ${ASSISTANT_NAME}. Atendo todo tipo de evento, mas o que mais gosto de fazer é a festa da família e dos amigos: carne boa, atendimento cuidadoso e você livre para aproveitar.`,
 } as const;
 
 export const trustItems = [
-  { value: "5 anos", label: "de churrasco em Marília e na região" },
-  { value: "2023", label: "escolhido pelo público" },
-  { value: "2024", label: "escolhido pelo público de novo" },
-  { value: "Indicação", label: "quem chega, quase sempre, veio por alguém" },
+  { value: "5 anos", label: "fazendo churrasco em Marília e região" },
+  { value: "Pai e filho", label: `o ${OWNER_NAME} na churrasqueira, o Léo ajudando` },
+  { value: "2023 e 2024", label: "escolhido pelo público" },
+  { value: "Só mão de obra", label: "os insumos são comprados à parte" },
 ] as const;
 
 export const story = {
-  eyebrow: "Nossa história",
-  title: "Pai e filho, no mesmo fogo",
+  eyebrow: "Sobre mim",
+  title: "Um pouco da minha história",
   paragraphs: [
-    "Quem fala aqui é o Gustavo. O churrasco eu faço com o meu pai. Há cinco anos a gente chega cedo, acende a brasa e fica até o último prato — em casa, no salão, no aniversário, no casamento.",
-    "Não é pressa de quem só quer entregar e ir embora. A gente gosta de comida boa e de ver a mesa cheia. O cuidado vem daí: do tempero, do ponto da carne e do jeito de atender.",
-    "Marília foi nos conhecendo de boca em boca. Em 2023, e de novo em 2024, a gente foi escolhido pelo público. Eu guardo isso com carinho. Quando o evento pede salgado, pizza e a estrutura de um buffet, eu chamo o parceiro Buffet Amigos da Pizza Marília.",
+    "Comecei trabalhando na Marinhos Beef, uma casa de carnes nobres que existia no bairro Esmeralda, aqui em Marília. Foi lá, no meio dos cortes e da brasa, que eu me encontrei no churrasco.",
+    "Depois trabalhei para alguns buffets da cidade. Aprendi a atender festa de verdade: chegar com tempo, organizar a churrasqueira e servir cada carne no ponto, sem atropelo.",
+    `Há cinco anos tenho o meu próprio serviço, em Marília e na região, com o meu filho, o ${ASSISTANT_NAME}, me ajudando. Em 2023 e em 2024 fui escolhido pelo público, e agradeço de coração a cada cliente que lembrou de mim.`,
   ],
 } as const;
 
@@ -33,73 +33,110 @@ export const steps = [
   {
     number: "01",
     title: "Você escolhe",
-    text: "Me diz se quer o Churrasco Completo ou o Churrasco Assador, quantas pessoas vêm, a data e a cidade.",
+    text: "Você me diz qual opção prefere, o Completo ou o Assador, quantas pessoas vêm, a data e a cidade.",
   },
   {
     number: "02",
-    title: "Eu monto a lista",
-    text: "Com o número de pessoas eu escrevo a lista de compras: carne, carvão e o que a opção escolhida pede.",
+    title: "Eu faço a lista",
+    text: "Pelo número de pessoas, eu monto a lista de compras: carne, carvão e o que mais a opção pedir.",
   },
   {
     number: "03",
-    title: "Eu compro, sem taxa",
-    text: "Você manda um Pix com um valor aproximado. Eu vou ao mercado e ao açougue e compro pessoalmente. Por essa compra eu não cobro nada a mais.",
+    title: "Eu faço as compras",
+    text: "Você me adianta um valor aproximado por Pix e eu mesmo compro os insumos no mercado e no açougue. Não cobro nada a mais por isso.",
   },
   {
     number: "04",
     title: "No dia do evento",
-    text: "A diferença entre o Pix e o que foi gasto a gente acerta junto com a mão de obra. Eu cuido da brasa, do que está na opção e do atendimento.",
+    text: "A diferença entre o Pix e o que foi gasto a gente acerta junto com a mão de obra. Aí é comigo: churrasqueira, acompanhamentos da opção e atendimento.",
   },
 ] as const;
 
 export const events = [
   {
+    title: "Família",
+    text: "Almoço de domingo, batizado, encontro da família. É o tipo de festa que eu mais gosto de fazer.",
+  },
+  {
+    title: "Amigos",
+    text: "Reunião de amigos em casa, na chácara ou no salão. Eu cuido da brasa para você ficar com quem veio.",
+  },
+  {
     title: "Aniversário",
-    text: "Mesa de família, amigo secreto que virou churrasco, bolo de um lado e brasa do outro. Eu entro no ritmo da casa.",
+    text: "Festa em casa ou no salão. Eu me ajeito no espaço que tiver, com discrição.",
   },
   {
     title: "Casamento",
-    text: "Bodas, jantar de noivos, um almoço depois da cerimônia. A gente combina o horário para a carne sair na hora certa.",
+    text: "Almoço ou jantar depois da cerimônia, bodas. A gente combina o horário para a carne sair na hora certa.",
   },
   {
     title: "Empresa",
-    text: "Confraternização, fim de projeto, um agradecimento ao time. Me conta quantas pessoas e se precisa de garçom.",
-  },
-  {
-    title: "Família",
-    text: "Domingo que cresceu, batizado, almoço de quem mora longe e voltou para Marília. É o churrasco que a gente mais gosta de fazer.",
+    text: "Confraternização e encontro de equipe. Me diga quantas pessoas vêm e se vai precisar de garçom.",
   },
   {
     title: "Formatura",
-    text: "Turma reunida, foto, brinde e fome de verdade. A brasa aguenta a festa inteira.",
-  },
-  {
-    title: "Com o buffet",
-    text: `Quando o evento pede mais do que a brasa, eu trabalho junto com o ${PARTNER_NAME}. Me chama que eu te explico como a gente divide.`,
+    text: "Festa da turma, com a família junto. Eu fico na churrasqueira até o fim.",
   },
 ] as const;
 
-export const testimonials = [
+export const choripan = {
+  eyebrow: "O carro-chefe",
+  title: "Choripán",
+  lead: "Se tem uma coisa que os clientes sempre lembram, é o choripán.",
+  paragraphs: [
+    "É o item mais elogiado das minhas festas e o mais comentado pelos clientes.",
+    "Ele vai nas duas opções, no Completo e no Assador.",
+  ],
+  photoNote: "Foto do choripán em breve.",
+} as const;
+
+export const optionsCopy = {
+  laborNote:
+    "Os valores abaixo são só a mão de obra. A carne, o carvão e os outros alimentos não entram nesse valor.",
+  peopleRule:
+    "Os valores valem para eventos de até 60 pessoas. Acima disso, entra uma taxa por pessoa, que a gente combina conforme a quantidade.",
+  waiter: "Se quiser alguém servindo, cada garçom sai R$ 150,00. Não é obrigatório.",
+} as const;
+
+export const hamburguer = {
+  eyebrow: "Opção extra",
+  title: "Hamburgueria",
+  text: "Além do churrasco, também levo uma opção de hamburgueria para o evento. Não tem valor fixo: a gente conversa e combina pelo WhatsApp, conforme a festa.",
+  price: "Valor a combinar",
+  button: "Perguntar sobre a hamburgueria",
+  message: "Olá, Rudnei! Gostaria de saber mais sobre a opção de hamburgueria para o meu evento.",
+} as const;
+
+export const instagram = {
+  eyebrow: "No Instagram",
+  title: "Acompanhe as festas por lá",
+  text: "Lá eu mostro a brasa, as carnes e um pouco de cada evento.",
+  button: "Seguir no Instagram",
+} as const;
+
+// Depoimentos iniciais. Entram no manifesto só quando ele ainda não tem o campo
+// `testimonials`. Depois disso, quem manda é a aba Depoimentos do admin.
+export const seedTestimonials = [
   {
     id: "ilustrativo-1",
-    quote:
-      "Espaço reservado para um depoimento real. Este texto é só o molde do cartão — não é a fala de um cliente.",
     name: "Nome do cliente",
-    context: "Tipo de evento · cidade",
+    text: "Espaço reservado para um depoimento real. Este texto é só o modelo do cartão, não é a fala de um cliente.",
+    event: "Tipo de evento · cidade",
+    illustrative: true,
   },
   {
     id: "ilustrativo-2",
-    quote:
-      "Quando alguém autorizar, o Gustavo troca este parágrafo pela frase verdadeira. Até lá, ele fica marcado como ilustrativo.",
     name: "Nome do cliente",
-    context: "Tipo de evento · cidade",
+    text: `Quando um cliente autorizar, o ${ASSISTANT_LABEL} troca este texto pela fala verdadeira. Até lá, ele fica marcado como ilustrativo.`,
+    event: "Tipo de evento · cidade",
+    illustrative: true,
   },
   {
     id: "ilustrativo-3",
-    quote:
-      "Se você já comeu com a gente e quiser deixar umas linhas, manda no WhatsApp. Eu só publico com o seu ok.",
     name: "Nome do cliente",
-    context: "Tipo de evento · cidade",
+    text: "Se você já fez um evento comigo e quiser deixar um comentário, me mande pelo WhatsApp. Só publico com a sua autorização.",
+    event: "Tipo de evento · cidade",
+    illustrative: true,
   },
 ] as const;
 
@@ -112,12 +149,12 @@ export const faqs = [
   {
     question: "Como funcionam a lista e o Pix?",
     answer:
-      "Eu monto a lista pelo número de pessoas. Você manda um Pix com um valor aproximado das compras. Eu compro pessoalmente e não cobro taxa por isso. No dia, a diferença é acertada junto com a mão de obra.",
+      "Eu monto a lista pelo número de pessoas. Você me adianta por Pix um valor aproximado das compras, e eu mesmo compro os insumos, sem cobrar taxa. No dia, a diferença é acertada junto com a mão de obra.",
   },
   {
     question: "O número de pessoas muda o preço da mão de obra?",
     answer:
-      "Não muda as duas opções. O Completo continua R$ 1.500 e o Assador continua R$ 700. O número de pessoas serve para a lista de compras ficar no tamanho certo. Garçom, se você quiser, entra à parte: R$ 150 cada.",
+      "Até 60 pessoas, não: o Completo é R$ 1.500 e o Assador é R$ 700. Acima de 60, entra uma taxa por pessoa, que a gente combina. O número de pessoas também serve para a lista de compras ficar no tamanho certo. Garçom, se você quiser, entra à parte: R$ 150 cada.",
   },
   {
     question: "Preciso levar garçom?",
@@ -137,19 +174,20 @@ export const faqs = [
   {
     question: "O que significa escolhido pelo público?",
     answer:
-      "Em 2023 e em 2024 as pessoas escolheram a gente. Foi escolha de quem comeu e indicou. Eu conto isso com orgulho, do jeito que aconteceu.",
+      "Em 2023 e em 2024 fui escolhido pelo público. Foi a escolha de quem conhece o meu trabalho, e eu agradeço muito por isso.",
   },
   {
-    question: "Vocês trabalham com buffet?",
-    answer: `Sim. O parceiro é o ${PARTNER_NAME}. Se o seu evento precisar dos dois, me chama no WhatsApp que a gente combina.`,
+    question: "Até quantas pessoas valem os preços?",
+    answer:
+      "Os valores de mão de obra valem para até 60 pessoas. Acima disso, entra uma taxa por pessoa, combinada conforme a quantidade de convidados.",
   },
 ] as const;
 
 export const area = {
   title: "Marília e a região",
   paragraphs: [
-    "A base da gente é Marília, no interior de São Paulo. A região eu atendo — e confirmo cidade por cidade, porque prefiro chegar bem do que prometer uma estrada que eu não vou cumprir.",
-    "No orçamento tem um campo de cidade. Preenche ele. Se eu não puder ir, eu te falo com franqueza no WhatsApp.",
+    "Moro em Marília, no interior de São Paulo, e também atendo as cidades da região. Confirmo cada cidade na conversa, para ter certeza de que consigo chegar no horário.",
+    "No orçamento tem um campo para a cidade. Se eu não puder ir, te aviso pelo WhatsApp.",
   ],
 } as const;
 
@@ -157,7 +195,7 @@ export const privacy = {
   title: "Privacidade, em linguagem clara",
   paragraphs: [
     "Este site não usa anúncio nem cookie de rastreamento. O orçamento não fica guardado aqui: o botão só abre o WhatsApp com a mensagem pronta, no seu celular.",
-    "A área de fotos, usada só pelo Gustavo, guarda um cookie de sessão para manter o login. Esse cookie não identifica você como visitante.",
-    "A conversa segue no WhatsApp, que tem a política da própria plataforma. Quem responde pelo atendimento é o Gustavo, no (14) 99627-2725.",
+    `A área de fotos, usada só pelo ${ASSISTANT_LABEL}, guarda um cookie de sessão para manter o login. Esse cookie não identifica você como visitante.`,
+    `A conversa segue no WhatsApp, que tem a política da própria plataforma. Quem responde pelo atendimento é o ${OWNER_NAME}, no ${WHATSAPP_DISPLAY}.`,
   ],
 } as const;

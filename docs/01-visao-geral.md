@@ -1,6 +1,6 @@
 # Visão geral
 
-O Rudnei Sciole Churrasqueiro é um site de uma página. O Gustavo atende com o pai, há cinco anos, em Marília-SP e na região. O visitante lê a história, escolhe entre duas opções de mão de obra e manda um orçamento pelo WhatsApp. As fotos do carrossel vêm de um armazenamento que a página consulta em toda visita.
+O Rudnei Sciole Churrasqueiro é um site de uma página. O Rudnei atende há cinco anos em Marília-SP e na região, com o Léo, filho e assistente. O visitante lê a história, escolhe entre duas opções de mão de obra e manda um orçamento pelo WhatsApp. As fotos e a lista do que aparece na página vêm de um armazenamento que o site consulta em toda visita. Quem mexe no código e na área escondida é o Léo.
 
 ## Pastas
 
@@ -12,7 +12,8 @@ O Rudnei Sciole Churrasqueiro é um site de uma página. O Gustavo atende com o 
 | `app/interno/painel/` | Tela real do admin. O visitante não abre esse caminho: o `proxy.ts` responde 404 |
 | `proxy.ts` | Reescreve o `ADMIN_PATH` para a tela interna |
 | `components/landing/` | Seções visíveis |
-| `components/admin/` | Login e painel de fotos |
+| `components/admin/` | Login, fotos por categoria e seções visíveis |
+| `lib/sections.ts` | Quais blocos da página podem ser ligados ou desligados |
 | `components/ui/` | Botão, campo e sanfona do shadcn/ui |
 | `content/site.ts` | Textos da página |
 | `content/gallery.ts` | Ilustrações de espera |
@@ -26,21 +27,22 @@ O Rudnei Sciole Churrasqueiro é um site de uma página. O Gustavo atende com o 
 
 ## Ordem da página
 
-1. Abertura com o título “Churrasco de pai e filho em Marília, há 5 anos” e o WhatsApp.
+1. Abertura com o título “Churrasco para o seu evento, em Marília e região” e o WhatsApp.
 2. Faixa de confiança: 5 anos, escolhido pelo público em 2023 e em 2024, Marília e região, indicação.
-3. História de pai e filho, em primeira pessoa.
+3. História do Rudnei, em primeira pessoa; o Léo aparece como filho e assistente.
 4. Como funciona: escolha, lista, compra feita por ele, dia do evento.
 5. Tipos de evento.
 6. As duas opções, o que entra nas duas e o garçom.
 7. Orçamento rápido.
-8. Depoimentos ilustrativos, marcados para edição.
+8. Depoimentos, editados na aba Depoimentos do admin (os iniciais são ilustrativos e marcados).
 9. Carrossel.
-10. Área atendida.
-11. Perguntas frequentes.
-12. Chamada final e rodapé, com a nota de privacidade.
+10. Galeria, com as abas Festas e Clientes.
+11. Área atendida.
+12. Perguntas frequentes.
+13. Chamada final e rodapé, com a nota de privacidade.
 
 O botão de WhatsApp fica fixo embaixo no celular e flutuante no desktop.
 
 ## Tom
 
-O texto fala como o Gustavo: primeira pessoa, família, sem prometer o que não foi combinado. “Escolhido pelo público” em 2023 e 2024 não é descrito como prêmio, título ou campeonato. Não há nota inventada nem depoimento apresentado como real.
+O texto fala como o Rudnei: primeira pessoa, família, sem prometer o que não foi combinado. O Léo aparece quando o assunto é o filho, sempre como “Léo, filho e assistente”. “Escolhido pelo público” em 2023 e 2024 não é descrito como prêmio, título ou campeonato. Não há nota inventada nem depoimento apresentado como real.

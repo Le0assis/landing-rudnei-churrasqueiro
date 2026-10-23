@@ -13,8 +13,8 @@ export function Faq() {
       <div className="mx-auto w-full max-w-3xl">
         <SectionHeading
           eyebrow="Perguntas"
-          title="O que eu sempre explico"
-          intro="Se a sua dúvida não estiver aqui, me chama. Eu respondo no WhatsApp."
+          title="Dúvidas comuns"
+          intro="Se a sua dúvida não estiver aqui, é só me chamar no WhatsApp."
         />
         <Accordion multiple className="mt-8 gap-3">
           {faqs.map((item) => (

@@ -1,12 +1,14 @@
 # Admin
 
-A área de fotos existe para uma pessoa: o Gustavo. Ela não tem cadastro de clientes.
+A área existe para uma pessoa: o Léo, que mantém o site. Ela não tem cadastro de clientes. Na página pública, quem fala e quem responde no WhatsApp é o Rudnei.
 
 ## Como abrir
 
 O endereço é `https://seu-dominio/` + `ADMIN_PATH`. No computador, com `npm run dev`, é `http://127.0.0.1:43123/` + o valor do `.env.local`.
 
 Não há link na home, no rodapé, no sitemap nem no `robots.txt`. O caminho interno `/interno/painel` responde 404. O `proxy.ts` só entrega a tela quando o pedido bate com o `ADMIN_PATH`, e manda o cabeçalho `X-Robots-Tag: noindex, nofollow, noarchive`. A página também declara `noindex` nos metadados.
+
+A leitura do cookie fica dentro de `<Suspense>` e chama `connection()` antes de `readSessionFromCookie`. A validade da sessão usa `Date.now()`. Sem essa espera, o prerender do Next 16 para com `blocking-prerender-current-time`.
 
 O caminho precisa combinar com `^[a-z0-9][a-z0-9-]{15,62}[a-z0-9]$`. Menor que isso, o admin fica desligado.
 
@@ -30,10 +32,19 @@ Os valores de exemplo do repositório são recusados quando `NODE_ENV` é `produ
 
 ## O que dá para fazer
 
-- Publicar foto. O navegador (`lib/compress-image.ts`) aceita JPG, PNG ou WEBP até 10 MB, desenha num canvas de no máximo 1600 px no lado maior e manda JPEG até 2,5 MB. O servidor confere os bytes mágicos de novo e recusa SVG e arquivo grande.
-- Até 30 fotos.
-- Descrição opcional, até 180 caracteres. Se ficar vazia, o texto padrão é “Churrasco do Rudnei Sciole Churrasqueiro em Marília”.
-- Subir, descer e apagar. Apagar pede confirmação na própria lista.
-- Ligar ou desligar o embaralhamento.
+Há seis abas: Carrossel, Festas, Clientes, Choripán, Depoimentos e Seções.
+
+- Publicar foto na aba aberta. O navegador (`lib/compress-image.ts`) aceita JPG, PNG ou WEBP até 10 MB, desenha num canvas de no máximo 1600 px no lado maior e manda JPEG até 2,5 MB. O servidor confere os bytes mágicos de novo e recusa SVG e arquivo grande.
+- Até 30 fotos em cada categoria. Festas cheias não impedem um upload no carrossel.
+- Descrição opcional, até 180 caracteres. Se ficar vazia, a legenda não aparece e o texto alternativo ganha uma frase genérica daquela categoria. Se for preenchida, a mesma frase vale como legenda e como texto alternativo.
+- Subir, descer e apagar dentro da categoria. Apagar pede confirmação na própria lista. A ordem de uma categoria não mexe na outra.
+- Ligar ou desligar o embaralhamento. Isso só existe no carrossel.
+- Na aba Seções, ligar ou desligar cada bloco público: abertura, faixa de confiança, sobre, como funciona, eventos, serviços e preços, orçamento, depoimentos, carrossel, galeria, cada aba da galeria, área, perguntas e contato. Contato inclui a chamada final e o botão fixo de WhatsApp. O botão do topo permanece. A galeria some por inteiro se ela estiver desligada ou se as duas abas estiverem desligadas.
+
+- Na aba Depoimentos, cuidar dos comentários em texto da seção Depoimentos: listar, adicionar, editar, apagar (com confirmação) e ligar/desligar cada um. Campos: nome do cliente (até 80 caracteres), texto (até 600) e evento ou data (opcional, até 120). Até 50 depoimentos. Desligado, o depoimento continua salvo, mas some da página. Se nenhum estiver ligado, a seção inteira some. Os três cartões iniciais são ilustrativos e aparecem com a faixa “Depoimento ilustrativo”; ao editar um deles, a faixa sai. Só publique fala de cliente com autorização.
+
+A API é `/api/admin/testimonials` (mesma origem e sessão obrigatórias): `POST` adiciona `{ name, text, event? }`, `PATCH` edita `{ id, name, text, event? }` ou liga/desliga `{ id, enabled }`, `DELETE` apaga `{ id }`. A regra fica em `lib/testimonials.ts`, testada em `tests/testimonials.test.ts`.
+
+A lista de ids fica em `lib/sections.ts`. O padrão, quando o manifesto ainda não tem o campo, é tudo visível.
 
 No computador, sem token, aparece “Salvando neste computador, na pasta data/photos.” Na Vercel com Blob, aparece que está salvando no Vercel Blob.

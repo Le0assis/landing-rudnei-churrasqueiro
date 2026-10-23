@@ -23,7 +23,7 @@ export function WhatsAppLink({
       render={
         <a href={href ?? generalWhatsAppUrl()} target="_blank" rel="noopener noreferrer" />
       }
-      className={cn("w-full sm:w-auto", className)}
+      className={cn("w-full font-semibold sm:w-auto", className)}
     >
       <WhatsAppIcon className="size-5" />
       {children}

@@ -4,7 +4,6 @@ import { privacy, slogans } from "@/content/site";
 import {
   INSTAGRAM_HANDLE,
   INSTAGRAM_URL,
-  PARTNER_NAME,
   WHATSAPP_DISPLAY,
 } from "@/lib/contact";
 import { generalWhatsAppUrl } from "@/lib/quote";
@@ -19,7 +18,6 @@ export function Footer() {
             <Wordmark motto />
           </div>
           <p className="mt-4 max-w-md font-serif text-lg text-cream italic">{slogans.motto}</p>
-          <p className="mt-4 text-cream-dim">Parceiro: {PARTNER_NAME}</p>
           <div className="mt-4 flex flex-wrap gap-4 text-sm">
             <a
               className="text-ember underline-offset-4 hover:underline"

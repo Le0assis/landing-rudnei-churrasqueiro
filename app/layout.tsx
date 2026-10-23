@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   description: localMetaDescription,
   applicationName: BUSINESS_NAME,
-  authors: [{ name: "Gustavo" }],
+  authors: [{ name: "Rudnei Sciole" }],
   keywords: [
     "churrasco Marília",
     "churrasqueiro Marília",
@@ -50,6 +50,15 @@ export const metadata: Metadata = {
     "Rudnei Sciole",
   ],
   alternates: { canonical: "/" },
+  icons: {
+    icon: [
+      { url: "/brand/favicon.ico", sizes: "any" },
+      { url: "/brand/simbolo-64.png", type: "image/png", sizes: "64x64" },
+      { url: "/brand/simbolo-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/brand/simbolo-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/brand/apple-touch-icon.png", sizes: "180x180" }],
+  },
   openGraph: {
     type: "website",
     locale: "pt_BR",

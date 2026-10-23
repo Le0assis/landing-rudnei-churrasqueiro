@@ -1,6 +1,6 @@
 # Rudnei Sciole Churrasqueiro
 
-Site do churrasco de pai e filho do Gustavo, em Marília-SP e região. A página apresenta a história, as duas opções de mão de obra, um orçamento que abre o WhatsApp com a mensagem pronta e um carrossel de fotos. As fotos entram por uma página escondida, sem precisar publicar o site de novo.
+Site do churrasco do Rudnei Sciole em Marília-SP e região. O Rudnei atende com o Léo, filho e assistente. A página fala na voz do Rudnei: a história, as duas opções de mão de obra, um orçamento que abre o WhatsApp com a mensagem pronta, um carrossel e uma galeria com as abas Festas e Clientes. As fotos e as seções visíveis entram por uma página escondida, sem precisar publicar o site de novo. Quem mantém este repositório é o Léo.
 
 Este guia é para quem está começando. Siga na ordem. Cada comando é para colar no terminal.
 
@@ -8,7 +8,7 @@ Este guia é para quem está começando. Siga na ordem. Cada comando é para col
 
 - O site no computador, em [http://127.0.0.1:43123](http://127.0.0.1:43123).
 - O mesmo site pronto para publicar de graça na Vercel.
-- Uma área só sua para colocar e apagar fotos do carrossel.
+- Uma área só sua para colocar e apagar fotos (carrossel, festas, clientes e choripán) e para ligar ou desligar seções da página.
 
 A documentação de cada parte fica na pasta [`docs/`](docs/01-visao-geral.md).
 
@@ -187,11 +187,14 @@ Essa página não tem link em lugar nenhum do site. Se o caminho estiver curto, 
 
 Dentro da área você pode:
 
+- escolher a categoria: Carrossel, Festas, Clientes ou Choripán;
 - enviar JPG, PNG ou WEBP (o navegador reduz a imagem antes);
-- escrever uma descrição, que vira o texto alternativo da foto;
-- subir ou descer a ordem;
+- escrever uma descrição opcional, que vira a legenda e o texto alternativo;
+- subir ou descer a ordem dentro daquela categoria;
 - apagar, com uma confirmação;
-- ligar ou desligar “Embaralhar a ordem a cada visita”.
+- ligar ou desligar “Embaralhar a ordem a cada visita” (só no carrossel);
+- abrir Depoimentos e listar, adicionar, editar, apagar ou ligar/desligar cada comentário de cliente (nome, texto e, se quiser, evento ou data). Só publique com a autorização do cliente;
+- abrir Seções e esconder ou mostrar cada bloco da página pública. O menu também perde o link da seção escondida.
 
 Detalhes em [`docs/05-admin.md`](docs/05-admin.md).
 
@@ -218,7 +221,7 @@ No Linux, se o Chromium reclamar de biblioteca faltando:
 npx playwright install --with-deps chromium
 ```
 
-`npm test` confere o cálculo da mão de obra, a mensagem do WhatsApp, o hash da senha, o cookie de sessão, o limite de tentativas e o tipo do arquivo de imagem. `npm run test:e2e` abre a home, preenche o orçamento, confere que o caminho secreto não aparece no site nem no `robots.txt`, entra na área de fotos e testa o botão de WhatsApp no celular e no desktop.
+`npm test` confere o cálculo da mão de obra, a mensagem do WhatsApp, o hash da senha, o cookie de sessão, o limite de tentativas, o tipo do arquivo de imagem, as categorias de foto, a legenda e o que fica visível quando uma seção é desligada. `npm run test:e2e` abre a home, preenche o orçamento, confere que o caminho secreto não aparece no site nem no `robots.txt`, entra na área de fotos e testa o botão de WhatsApp no celular e no desktop.
 
 ## 8. Publicar na Vercel
 
@@ -242,10 +245,12 @@ Mais detalhes em [`docs/10-deploy.md`](docs/10-deploy.md).
 
 | O que mudar | Onde |
 | --- | --- |
-| Frases da página, perguntas, depoimentos | `content/site.ts` |
+| Frases da página e perguntas | `content/site.ts` |
+| Depoimentos (comentários em texto) | área escondida, aba Depoimentos |
 | Telefone, Instagram, nome do parceiro | `lib/contact.ts` |
 | Preços, cardápio e limites do orçamento | `lib/pricing.ts` |
-| Fotos do carrossel | área escondida, não um arquivo do Git |
+| Fotos do carrossel, das festas, dos clientes e do choripán | área escondida, não um arquivo do Git |
+| Seções visíveis na página | área escondida, aba Seções |
 | Ilustrações de espera | `public/placeholders/` e `content/gallery.ts` |
 | Desenho do selo (chama e chapéu) | `components/landing/logo.tsx` |
 

@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import { getAdminPath } from "@/lib/admin-path";
 import { createSessionToken, verifySessionToken } from "@/lib/auth";
@@ -54,7 +56,17 @@ describe("sessão", () => {
       false,
     );
     expect(verifySessionToken(token, secret, Date.parse("2026-10-23T12:00:01Z"))).toBe(false);
-    expect(verifySessionToken(undefined, secret)).toBe(false);
+    expect(verifySessionToken(undefined, secret, Date.parse("2026-10-22T13:00:00Z"))).toBe(false);
+  });
+});
+
+describe("prerender do admin", () => {
+  it("espera a visita antes de ler o relógio da sessão", () => {
+    const source = readFileSync(path.join(process.cwd(), "app/interno/painel/page.tsx"), "utf8");
+    const connectionAt = source.lastIndexOf("await connection()");
+    const sessionAt = source.lastIndexOf("readSessionFromCookie(");
+    expect(connectionAt).toBeGreaterThan(-1);
+    expect(sessionAt).toBeGreaterThan(connectionAt);
   });
 });
 

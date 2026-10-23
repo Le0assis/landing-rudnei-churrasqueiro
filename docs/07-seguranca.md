@@ -38,6 +38,7 @@ Pedidos que mudam dados (`POST` e `DELETE` do admin) exigem cabeçalho `Origin` 
 - Login: 5 tentativas a cada 15 minutos por IP.
 - Upload: 20 a cada 15 minutos por IP.
 - Reordenar: 60 a cada 15 minutos por IP.
+- Ligar ou desligar seção: 60 a cada 15 minutos por IP.
 
 O IP vem do primeiro valor de `X-Forwarded-For` ou de `X-Real-Ip`. Na Vercel esse cabeçalho é preenchido pela plataforma.
 

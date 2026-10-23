@@ -10,7 +10,7 @@ O formulário está em `components/landing/quote-form.tsx`. A conta mora em `lib
 | Churrasco Assador | Opção 02 | R$ 700 |
 | Garçom, cada | opcional | R$ 150 |
 
-O número de pessoas **não** entra na conta. Ele vai na mensagem para o Gustavo montar a lista de compras.
+O número de pessoas **não** entra na conta. Ele vai na mensagem para o Rudnei montar a lista de compras.
 
 Total = mão de obra da opção + (garçons × 150).
 

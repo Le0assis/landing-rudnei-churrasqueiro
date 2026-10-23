@@ -1,16 +1,14 @@
 import { SectionHeading } from "@/components/landing/section-heading";
 import { steps } from "@/content/site";
-import { WAITER_PRICE } from "@/lib/pricing";
-import { formatBrl } from "@/lib/format";
 
 export function HowItWorks() {
   return (
     <section id="como-funciona" className="scroll-mt-24 px-5 py-16 md:py-24">
       <div className="mx-auto w-full max-w-6xl">
         <SectionHeading
-          eyebrow="Como funciona"
-          title="Do recado até a brasa"
-          intro="É simples. Eu monto a lista, compro sem cobrar por isso, e no dia a gente acerta a diferença junto com a mão de obra."
+          eyebrow="Passo a passo"
+          title="Como funciona"
+          intro="Eu monto a lista de compras, compro os insumos com o Pix que você adianta e, no dia, a gente acerta a diferença junto com a mão de obra."
         />
         <ol className="mt-10 grid gap-4 md:grid-cols-2">
           {steps.map((step) => (
@@ -23,9 +21,6 @@ export function HowItWorks() {
             </li>
           ))}
         </ol>
-        <p className="mt-6 text-cream-dim">
-          Se quiser alguém servindo, cada garçom sai {formatBrl(WAITER_PRICE)}. Não é obrigatório.
-        </p>
       </div>
     </section>
   );

@@ -10,7 +10,7 @@ export function Story({ photo }: { photo: PublicPhoto }) {
         <PhotoFrame
           photo={photo}
           sizes="(min-width: 1024px) 40vw, 100vw"
-          className="aspect-[4/5] rounded-[2rem] border border-cream/10"
+          className="frame-glow aspect-[4/5] rounded-[2rem] border border-flame/30"
         />
         <div>
           <SectionHeading eyebrow={story.eyebrow} title={story.title} />
