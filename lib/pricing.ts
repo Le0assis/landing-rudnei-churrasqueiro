@@ -1,7 +1,7 @@
 export const LIMITS = {
   minPeople: 1,
   maxPeople: 500,
-  includedPeople: 60,
+  includedPeople: 50,
   minWaiters: 0,
   maxWaiters: 20,
   maxYearsAhead: 2,
