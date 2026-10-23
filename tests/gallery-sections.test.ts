@@ -6,6 +6,7 @@ import { hero, privacy, story, trustItems } from "@/content/site";
 import { ASSISTANT_LABEL, ASSISTANT_NAME, OWNER_NAME } from "@/lib/contact";
 import { LIMITS } from "@/lib/pricing";
 import {
+  SECTION_CATALOG,
   defaultSections,
   isPublicSectionVisible,
   parseSections,
@@ -228,7 +229,7 @@ describe("clientes e choripán", () => {
   });
 });
 
-describe("hamburgueria", () => {
+describe("hamburgada", () => {
   it("liga por padrão e some quando desligada", () => {
     expect(defaultSections().hamburguer).toBe(true);
     expect(parseSections({}).hamburguer).toBe(true);
@@ -236,5 +237,6 @@ describe("hamburgueria", () => {
     expect(isPublicSectionVisible(off, "hamburguer")).toBe(false);
     expect(isPublicSectionVisible(defaultSections(), "hamburguer")).toBe(true);
     expect(parseSections({ hamburguer: false }).hamburguer).toBe(false);
+    expect(SECTION_CATALOG.find((item) => item.id === "hamburguer")?.label).toBe("Hamburgada");
   });
 });
