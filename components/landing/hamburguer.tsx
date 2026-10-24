@@ -12,8 +12,7 @@ export function Hamburguer() {
             src="/gallery/hamburguer-artesanal-luvas-pretas.webp"
             alt={hamburguer.imageAlt}
             fill
-            unoptimized
-            sizes="(min-width: 768px) 40vw, 100vw"
+            sizes="(min-width: 768px) min(40vw, 640px), min(100vw, 640px)"
             className="object-cover"
           />
         </div>

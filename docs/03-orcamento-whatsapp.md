@@ -12,7 +12,7 @@ O formulário está em `components/landing/quote-form.tsx`. A conta mora em `lib
 
 O número de pessoas **não** entra na conta. Ele vai na mensagem para o Rudnei montar a lista de compras.
 
-A mão de obra vale para até 50 pessoas (`LIMITS.includedPeople` em `lib/pricing.ts`). Acima disso, o total continua o mesmo, mas a mensagem diz que o valor vale para até 50 pessoas e pergunta "Como fica a taxa por pessoa acima de 50?".
+A mão de obra vale até o tamanho do evento em `LIMITS.includedPeople` (`lib/pricing.ts`). Acima desse tamanho, o total continua o mesmo, mas a mensagem diz que o valor vale até esse tamanho e pergunta como fica a taxa por pessoa além dele.
 
 Total = mão de obra da opção + (garçons × 150).
 
@@ -20,7 +20,7 @@ Garçons aceitos: inteiros de 0 a 20. Pessoas: inteiros de 1 a 500. Data: hoje o
 
 ## O que a mensagem deixa claro
 
-O texto é o primeiro contato do cliente, curto e educado: "Olá, Rudnei! Vi seu site e gostaria de um orçamento.", depois a opção, as pessoas, a data por extenso, a cidade e os garçons ("não" quando é 0) em tópicos, o valor da mão de obra com o detalhe (ex.: "Churrasco Assador R$ 700,00 + 1 garçom R$ 150,00") e quatro dúvidas numeradas: valor total com ingredientes, lista de compras e pagamento, horário e duração, e disponibilidade da data. Acima de 50 pessoas entra a dúvida da taxa por pessoa.
+O texto é o primeiro contato do cliente, curto e educado: "Olá, Rudnei! Vi seu site e gostaria de um orçamento.", depois a opção, as pessoas, a data por extenso, a cidade e os garçons ("não" quando é 0) em tópicos, o valor da mão de obra com o detalhe (ex.: "Churrasco Assador R$ 700,00 + 1 garçom R$ 150,00") e quatro dúvidas numeradas: valor total com ingredientes, lista de compras e pagamento, horário e duração, e disponibilidade da data. Quando o evento passa desse tamanho, entra a dúvida da taxa por pessoa.
 
 O link é `https://wa.me/5514996272725?text=...`. O número também está em `lib/contact.ts`.
 

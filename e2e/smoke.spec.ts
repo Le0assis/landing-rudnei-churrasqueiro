@@ -13,7 +13,7 @@ function futureDate(daysAhead: number): string {
 test("a home apresenta o churrasco e o orçamento", async ({ page }) => {
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { level: 1, name: "Churrasco para o seu evento, em Marília e região" }),
+    page.getByRole("heading", { level: 1, name: "Churrasco para festas de família e amigos, em Marília e região" }),
   ).toBeVisible();
   await expect(page.getByText("escolhido pelo público").first()).toBeVisible();
   await expect(page.getByText("Marília", { exact: false }).first()).toBeVisible();

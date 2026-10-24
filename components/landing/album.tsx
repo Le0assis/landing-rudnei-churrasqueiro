@@ -123,8 +123,7 @@ export function Album({
                           src={photo.url}
                           alt={photo.alt}
                           fill
-                          sizes="(min-width: 1024px) 22vw, (min-width: 640px) 30vw, 45vw"
-                          unoptimized={photo.url.startsWith("/gallery/") || photo.url.startsWith("/photos/")}
+                          sizes="(min-width: 1024px) min(22vw, 640px), (min-width: 640px) min(30vw, 640px), 45vw"
                           className="album-zoom object-cover transition duration-500 group-hover:scale-[1.04]"
                         />
                       </span>
@@ -255,8 +254,7 @@ function Lightbox({
             src={photo.url}
             alt={photo.alt}
             fill
-            sizes="(min-width: 1024px) 960px, 100vw"
-            unoptimized={photo.url.startsWith("/gallery/") || photo.url.startsWith("/photos/")}
+            sizes={photo.width <= 640 ? "(min-width: 640px) 640px, 100vw" : "(min-width: 1024px) 960px, 100vw"}
             className="object-contain"
           />
         </motion.div>
